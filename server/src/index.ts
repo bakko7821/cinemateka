@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
@@ -12,11 +15,17 @@ app.get("/", (req: Request, res: Response) => {
 
 const start = async () => {
   try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/mern-ts");
-    app.listen(5000, () => console.log("Сервер запущен на http://localhost:5000"));
+    await mongoose.connect(process.env.MONGO_URI!);
+    
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => console.log(`Сервер на порту ${port}`));
   } catch (err) {
     console.error("Ошибка подключения к Mongo:", err);
   }
 };
 
 start();
+
+import usersRoutes from './routes/users'
+
+app.use("/users", usersRoutes);
