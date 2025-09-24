@@ -1,8 +1,10 @@
+import RegisterCard from "../components/RegisterCard"
+import '../styles/RegisterPage.css'
 
 function RegisterPage() {
     return (
         <>
-            <p>Страница регистрации</p>
+            <RegisterCard />
         </>
     )
 }

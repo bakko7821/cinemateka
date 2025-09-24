@@ -14,10 +14,24 @@
 - Добавлен **models/User.ts**
 - Добавлен **routes/auth.ts**
 - Добавлен **routes/users.ts**
+- Добавлен файл **middleware.ts** в **/middleware/**
 
 ### Клиентская часть
 
 - В **App.tsx** добавленны компоненты Header и Main
 - В **Main.tsx** добавлена маршрутизация на **RegisterPage.tsx**, **LoginPage.tsx** и **HomePage.tsx**
 
-# commit ?
+# commit 2.2.0
+
+### Серверная часть
+
+- Добавлен route **/register** в **routes/auth.ts**
+- Добавлен route **/login** в **routes/auth.ts**
+
+### Клиентская часть
+
+- Создана страница **HomePage.tsx** с компонентом **HomeCard.tsx**
+    - Была добавленна механика обработки JWT токена, через библиотеку **jwt-decode** - если пользователь авторизован, отрисовываем один контент, если нет - то другой 
+- Создана страница **RegisterPage.tsx** с компонентом **RegisterCard.tsx**
+- Создана страница **LoginPage.tsx** с компонентом **LoginCard.tsx**
+- Создана страница **RecoveryPage.tsx** с компонентом **RecoveryCard.tsx**

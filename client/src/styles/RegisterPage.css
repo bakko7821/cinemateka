@@ -1,0 +1,79 @@
+.registerBox, .loginBox {
+    width: 350px;
+    padding: 16px;
+    gap: 16px;
+    border-radius: 32px;
+    background-color: var(--background-card-color);
+}
+
+.registerBox form, .loginBox  form {
+    gap: 16px;
+}
+
+.registerBox form .fullNameBox {
+    gap: 16px;
+}
+
+.headingText {
+    font-size: clamp(1.5rem, 2vh, 2rem);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.registerBox .useAuthButton, .loginBox .useAuthButton {
+    width: 100%;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    color: var(--alternative-text-color);
+    background-color: #fff;
+    transition: background-color 0.3s;
+}
+
+.registerBox .useAuthButton:hover, .loginBox .useAuthButton:hover {
+    transition: background-color 0.3s;
+    background-color: #D9D9D9;
+}
+
+.orBox {
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    gap: 8px;
+    width: 100%;
+}
+
+.orBox span {
+    width: 100%;
+    height: 1px;
+    background-color: #fff;
+}
+
+.links-box {
+    width: 100%;
+}
+
+.ifUserHaveAccount, .ifUserFoggotPassword{
+    text-align: start;
+    width: 100%;
+    line-height: 1.5;
+}
+
+form button {
+    text-transform: uppercase;
+    color: var(--secondary-text-color);
+    font-weight: 500;
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    width: 100%;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: var(--background-color);
+    transition: background-color 0.5s, color 0.3s;
+}
+
+form button:hover {
+    transition: background-color 0.5s, color 0.3s;
+    background-color: var(--main-color);
+    color: var(--text-color);
+}

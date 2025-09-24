@@ -3,9 +3,6 @@ import type { ChangeEvent, FormEvent, JSX } from "react";
 import axios, { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 
-import googleLogo from "../../public/images/google.svg"
-import appleLogo from "../../public/images/apple.svg"
-
 interface FormData {
   firstname: string;
   lastname: string;
@@ -14,7 +11,7 @@ interface FormData {
   password: string;
 }
 
-export default function RegisterCard(): JSX.Element {
+export default function RecoveryPasswordCard(): JSX.Element {
   const [form, setForm] = useState<FormData>({
     firstname: "",
     lastname: "",
@@ -45,49 +42,34 @@ export default function RegisterCard(): JSX.Element {
   };
 
   return (
-    <div className="registerBox flex-column flex-center">
+    <div className="loginBox flex-column flex-center">
       <p className="headingText">Регистрация</p>
-      <button className="useAuthButton flex-center">
-        <img src={googleLogo} alt="" />
-        Вход с аккаунтом Google
-      </button>
-      <button className="useAuthButton flex-center">
-        <img src={appleLogo} alt="" />
-        Вход с аккаунтом Apple
-      </button>
-      <div className="orBox flex-center">
-        <span></span>
-        <p>ИЛИ</p>
-        <span></span>
-      </div>
 
       <form onSubmit={handleSubmit} className="flex-column flex-center">
-        <div className="fullNameBox flex-center">
-          <div className="floating-input">
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              value={form.firstname}
-              onChange={handleChange}
-              placeholder="Имя"
-              required
-            />
-            <label htmlFor="firstname">Имя</label>
-          </div>
+        <div className="floating-input">
+          <input
+            type="text"
+            id="firstname"
+            name="firstname"
+            value={form.firstname}
+            onChange={handleChange}
+            placeholder="Имя"
+            required
+          />
+          <label htmlFor="firstname">Имя</label>
+        </div>
 
-          <div className="floating-input">
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              value={form.lastname}
-              onChange={handleChange}
-              placeholder="Фамилия"
-              required
-            />
-            <label htmlFor="lastname">Фамилия</label>
-          </div>
+        <div className="floating-input">
+          <input
+            type="text"
+            id="lastname"
+            name="lastname"
+            value={form.lastname}
+            onChange={handleChange}
+            placeholder="Фамилия"
+            required
+          />
+          <label htmlFor="lastname">Фамилия</label>
         </div>
 
         <div className="floating-input">

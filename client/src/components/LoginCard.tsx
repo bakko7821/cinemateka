@@ -1,24 +1,32 @@
 import React, { useState } from "react";
 import type { ChangeEvent, FormEvent, JSX } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import axios, { AxiosError } from "axios";
-import { Link } from "react-router-dom";
 
-import googleLogo from "../../public/images/google.svg"
-import appleLogo from "../../public/images/apple.svg"
+import googleLogo from "../../public/images/google.svg";
+import appleLogo from "../../public/images/apple.svg";
 
 interface FormData {
-  firstname: string;
-  lastname: string;
-  username: string;
   email: string;
   password: string;
 }
 
-export default function RegisterCard(): JSX.Element {
+interface UserDto {
+  id: string;
+  username: string;
+  email: string;
+}
+
+interface LoginResponse {
+  token: string;
+  user: UserDto;
+  msg?: string;
+}
+
+export default function LoginCard(): JSX.Element {
+  const navigate = useNavigate();
+
   const [form, setForm] = useState<FormData>({
-    firstname: "",
-    lastname: "",
-    username: "",
     email: "",
     password: ""
   });
@@ -33,11 +41,16 @@ export default function RegisterCard(): JSX.Element {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await axios.post<{ msg: string }>(
-        "http://localhost:5000/auth/register",
+      // говорим TS, какой ответ мы ожидаем
+      const response = await axios.post<LoginResponse>(
+        "http://localhost:5000/auth/login",
         form
       );
-      setMessage(response.data.msg);
+
+      localStorage.setItem("token", response.data.token);
+
+      setMessage(response.data.msg ?? `Добро пожаловать, ${response.data.user.username}!`);
+      navigate("/");
     } catch (err) {
       const axiosErr = err as AxiosError<{ msg?: string }>;
       setMessage(axiosErr?.response?.data?.msg ?? "Ошибка");
@@ -45,8 +58,8 @@ export default function RegisterCard(): JSX.Element {
   };
 
   return (
-    <div className="registerBox flex-column flex-center">
-      <p className="headingText">Регистрация</p>
+    <div className="loginBox flex-column flex-center">
+      <p className="headingText">Вход</p>
       <button className="useAuthButton flex-center">
         <img src={googleLogo} alt="" />
         Вход с аккаунтом Google
@@ -62,47 +75,6 @@ export default function RegisterCard(): JSX.Element {
       </div>
 
       <form onSubmit={handleSubmit} className="flex-column flex-center">
-        <div className="fullNameBox flex-center">
-          <div className="floating-input">
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              value={form.firstname}
-              onChange={handleChange}
-              placeholder="Имя"
-              required
-            />
-            <label htmlFor="firstname">Имя</label>
-          </div>
-
-          <div className="floating-input">
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              value={form.lastname}
-              onChange={handleChange}
-              placeholder="Фамилия"
-              required
-            />
-            <label htmlFor="lastname">Фамилия</label>
-          </div>
-        </div>
-
-        <div className="floating-input">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="@Имя пользователя"
-            required
-          />
-          <label htmlFor="username">@Имя пользователя</label>
-        </div>
-
         <div className="floating-input">
           <input
             type="email"
@@ -128,9 +100,17 @@ export default function RegisterCard(): JSX.Element {
           />
           <label htmlFor="password">Пароль</label>
         </div>
-        <p className="ifUserHaveAccount">Уже есть аккаунт? <Link to={"/login"}>Войти в аккаунт</Link></p>
 
-        <button type="submit">Зарегистрироваться</button>
+        <div className="linksBox flex-column">
+          <p className="ifUserFoggotPassword">
+            <Link to="/recovery-password">Забыли пароль?</Link>
+          </p>
+          <p className="ifUserHaveAccount">
+            Впервые на сайте? <Link to="/register">Зарегистрироваться</Link>
+          </p>
+        </div>
+
+        <button type="submit">Войти</button>
       </form>
 
       {message && (

@@ -35,6 +35,15 @@
   src: url(assets/fonts/SFProText-Heavy.ttf);
 }
 
+:root {
+  --background-color: #1B1E23;
+  --background-card-color: #242632;
+  --text-color: #f2f2f2;
+  --secondary-text-color: #818181;
+  --alternative-text-color: #000000;
+  --main-color: #6C5CD6;
+}
+
 /* Reset and base styles  */
 * {
 	padding: 0px;
@@ -52,7 +61,8 @@
 /* Links */
 
 a, a:link, a:visited  {
-    text-decoration: none;
+  text-decoration: none; 
+  color: var(--main-color);
 }
 
 a:hover  {
@@ -88,6 +98,62 @@ address {
 }
 
 /* Form */
+.floating-input {
+  position: relative;
+  width: 100%;
+}
+
+.floating-input input, .floating-input textarea {
+  width: 100%;
+  background-color: transparent;
+  border: 2px var(--main-color) solid;
+  padding: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: var(--text-color);
+  outline: none;
+  border-radius: 16px;
+}
+
+/* Прячем placeholder, чтобы не мешался */
+.floating-input input::placeholder, .floating-input textarea::placeholder {
+  color: transparent;
+}
+
+/* Лейбл */
+.floating-input label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: var(--secondary-text-color);
+  pointer-events: none;
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: 0.2s ease all;
+}
+
+/* Когда поле пустое — label внутри */
+.floating-input input:placeholder-shown + label, .floating-input textarea:placeholder-shown + label {
+  top: 16px;
+  font-size: clamp(1rem, 2vh, 1.5rem);
+  line-height: 1.2;
+  color: var(--secondary-text-color);
+}
+
+/* Когда фокус или есть текст — label наверху */
+.floating-input input:focus + label,
+.floating-input input:not(:placeholder-shown) + label,
+.floating-input textarea:focus + label,
+.floating-input textarea:not(:placeholder-shown) +label {
+  top: -16px;
+  left: 16px;
+  padding: 8px 16px;
+  background-color: var(--background-card-color);
+  font-size: clamp(0.8rem, 2vh, 1rem);
+  color: var(--secondary-text-color); /* синий при фокусе */
+}
 
 input, textarea, button, select {
 	font-family: inherit;
@@ -128,4 +194,30 @@ legend {
 
 input[type='file'] {
 	max-width: 100%;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
 }

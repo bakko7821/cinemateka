@@ -27,5 +27,7 @@ const start = async () => {
 start();
 
 import usersRoutes from './routes/users'
+import authRoutes from './routes/auth'
 
 app.use("/users", usersRoutes);
+app.use("/auth", authRoutes);

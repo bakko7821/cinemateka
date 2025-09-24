@@ -6,9 +6,10 @@ import { authMiddleware } from "../middleware/middleware";
 
 const router = express.Router();
 
-router.post("/register", authMiddleware, async (req, res) => {
+// Регистрация (без middleware)
+router.post("/register", async (req, res) => {
   try {
-    const { firstname, lastname, username, email, password, createdAt } = req.body;
+    const { firstname, lastname, username, email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ msg: "Email уже используется" });
@@ -34,7 +35,8 @@ router.post("/register", authMiddleware, async (req, res) => {
   }
 });
 
-router.post("/login", authMiddleware, async (req, res) => {
+// Авторизация (без middleware)
+router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -46,7 +48,7 @@ router.post("/login", authMiddleware, async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!, { expiresIn: "1h" });
 
-    res.json({ token, user: { id: user._id, username: user.username, email: user.email } });
+    res.json({msg: "Авторизация успешна!", token, user});
   } catch (err: unknown) {
     if (err instanceof Error) {
       res.status(500).json({ error: err.message });
@@ -55,5 +57,11 @@ router.post("/login", authMiddleware, async (req, res) => {
     }
   }
 });
+
+// Пример защищённого роута
+router.get("/profile", authMiddleware, async (req, res) => {
+  res.json({ msg: "Это защищённая страница профиля" });
+});
+
 
 export default router;
