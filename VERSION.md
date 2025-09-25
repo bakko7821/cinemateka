@@ -35,3 +35,10 @@
 - Создана страница **RegisterPage.tsx** с компонентом **RegisterCard.tsx**
 - Создана страница **LoginPage.tsx** с компонентом **LoginCard.tsx**
 - Создана страница **RecoveryPage.tsx** с компонентом **RecoveryCard.tsx**
+
+# commit 2.3.0
+
+### Клиентская часть
+
+- Был создан компонент **Header.tsx** и добавленно бургер меню в компоненте **NavMenu.tsx**
+- Добавлена механика выхода из аккаунта по кнопке **Log Out**

@@ -3,9 +3,6 @@ import type { ChangeEvent, FormEvent, JSX } from "react";
 import axios, { AxiosError } from "axios";
 import { Link } from "react-router-dom";
 
-import googleLogo from "../../public/images/google.svg"
-import appleLogo from "../../public/images/apple.svg"
-
 interface FormData {
   firstname: string;
   lastname: string;
@@ -48,11 +45,11 @@ export default function RegisterCard(): JSX.Element {
     <div className="registerBox flex-column flex-center">
       <p className="headingText">Регистрация</p>
       <button className="useAuthButton flex-center">
-        <img src={googleLogo} alt="" />
+        <img src="../../public/images/google.svg" alt="" />
         Вход с аккаунтом Google
       </button>
       <button className="useAuthButton flex-center">
-        <img src={appleLogo} alt="" />
+        <img src="../../public/images/apple.svg" alt="" />
         Вход с аккаунтом Apple
       </button>
       <div className="orBox flex-center">

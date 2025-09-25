@@ -1,0 +1,107 @@
+.headerBox {
+    width: 100%;
+}
+
+.signInBox {
+    gap: 8px;
+}
+
+.signInBox button {
+    border: 1px var(--main-color) solid;
+    border-radius: 12px;
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    color: var(--text-color);
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 8px 16px;
+    transition: background-color 0.5s;
+}
+
+.signInBox button.registerButton {
+    background-color: var(--main-color);
+    transition: background-color 0.5s;
+}
+
+.signInBox button.registerButton:hover {
+    background-color: #8f82e0;
+    transition: background-color 0.5s;
+}
+
+.signInBox button.signInButton:hover {
+    background-color: var(--main-color);
+    transition: background-color 0.5s;
+}
+
+.userNavBox {
+    gap: 16px;
+}
+
+.searchBox {
+    gap: 8px;
+    border-radius: 12px;
+    padding: 8px 16px;
+    border: 1px var(--main-color) solid;
+    background-color: var(--background-card-color);
+    color: var(--text-color);
+}
+
+.searchBox input::placeholder {
+    color: var(--main-color);
+}
+
+.userProfileButton {
+    border: 1px var(--main-color) solid;
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.userProfileButton.active {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.navMenuBox {
+    top: 58px;
+    right: 16px;
+    position: absolute;
+    z-index: 999;
+    border-radius: 16px 0px 16px 16px;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--background-card-color);
+}
+
+.navMenuBox .link {
+    padding: 8px;
+    border-radius: 12px;
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    transition: background-color 0.5s;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--main-color);
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-weight: 500;
+}
+
+.navMenuBox .link:hover {
+    transition: background-color 0.5s;
+    background-color: var(--background-color);
+}
+
+.navMenuBox nav {
+    gap: 8px;
+}
+
+.navMenuBox .subscribe.link {
+    background-color: var(--main-color);
+    color: var(--text-color);
+    transition: background-color 0.5s;
+}
+
+.navMenuBox .subscribe.link:hover {
+    background-color: #8f82e0;
+    transition: background-color 0.5s;
+}
