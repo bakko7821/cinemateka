@@ -45,6 +45,7 @@ export default function LoginCard(): JSX.Element {
       );
 
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("authUser", JSON.stringify(response.data.user));
 
       setMessage(response.data.msg ?? `Добро пожаловать, ${response.data.user.username}!`);
       navigate("/");

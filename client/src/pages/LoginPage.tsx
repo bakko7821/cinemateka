@@ -3,9 +3,7 @@ import '../styles/RegisterPage.css'
 
 function LoginPage() {
     return (
-        <>
-            <LoginCard />
-        </>
+        <LoginCard />
     )
 }
 

@@ -1,0 +1,94 @@
+.main {
+  width: 1440px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 32px;
+}
+
+.headingBox {
+    width: 100%;
+    align-items: center;
+}
+
+.userAvatar {
+    width: 64px;
+    height: 64px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--alternative-text-color);
+    text-transform: uppercase;
+    background-color: var(--text-color);
+    border-radius: 16px;
+}
+
+.headingBox .buttonsBox {
+    gap: 8px;
+}
+
+.headingBox .followButton {
+    background-color: transparent;
+    border: 1px var(--main-color) solid;
+}
+
+.headingBox .followButton img {
+    transition: filter 0.3s ease;
+}
+
+.headingBox .followButton:hover {
+    background-color: #6C5CD6;
+}
+
+.headingBox .followButton:hover img {
+    transition: filter 0.3s ease;
+    filter: brightness(0) invert(1);
+}
+
+.headingBox button {
+    background-color: var(--main-color);
+    padding: 8px;
+    gap: 8px;
+    border-radius: 12px;
+    font-size: (0.8rem, 2vh, 1rem);
+    font-weight: 500;
+    transition: background-color 0.5s;
+}
+
+.headingBox button:hover {
+    background-color: #8f82e0;
+    transition: background-color 0.5s;
+}
+
+.userInfoBox {
+    gap: 8px;
+}
+
+.userInfoBox .textBox .fullNameUser{
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.3;
+}
+
+.userInfoBox .textBox .userName{
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-weight: 500;
+    color: var(--secondary-text-color);
+    line-height: 1.5;
+}
+
+.favoriteGenre, .favoriteFilms, .userReviews {
+    width: 100%;
+    gap: 16px;
+}
+
+.favoriteGenre .titleText, 
+.favoriteFilms .titleText, 
+.userReviews .titleText {
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.3;
+}
