@@ -22,14 +22,14 @@ export default function AddFilmCard() {
       setError(null);
       setMessage(null);
 
-      // 1️⃣ Парсим фильм через API
+      // Парсим фильм через API
       const res = await axios.post<FilmData>(
         "http://localhost:5000/api/parse-by-api",
         { url }
       );
       setFilm(res.data);
 
-      // 2️⃣ Проверяем уникальность по title
+      // Проверяем уникальность по title
       const existingRes = await axios.get<{ title: string }[]>("http://localhost:5000/films");
       const exists = existingRes.data.some(f => f.title === res.data.title);
 
@@ -38,7 +38,7 @@ export default function AddFilmCard() {
         return;
       }
 
-      // 3️⃣ Добавляем фильм в базу
+      // Добавляем фильм в базу
       const addRes = await axios.post("http://localhost:5000/films", {
         title: res.data.title,
         poster: res.data.poster ?? "",
@@ -57,19 +57,36 @@ export default function AddFilmCard() {
       <input
         value={url}
         onChange={e => setUrl(e.target.value)}
-        placeholder="https://www.kinopoisk.ru/film/5003510/"
+        placeholder="Вставьте ссылку на свой"
         style={{ width: 400 }}
       />
-      <button onClick={handleParseAndAdd}>Добавить фильм</button>
+      <button onClick={handleParseAndAdd}>
+        <img src="../../public/images/add2.svg" alt="" />
+      </button>
 
-      {error && <div style={{ color: "red", marginTop: 10 }}>{error}</div>}
-      {message && <div style={{ color: "green", marginTop: 10 }}>{message}</div>}
+      {error && <div className="errorMessage">{error}</div>}
+      {message && <div className="notificationMessage">{message}</div>}
 
       {film && (
-        <div style={{ marginTop: 20 }}>
-          <h3>{film.title} {film.year ? `(${film.year})` : ""}</h3>
-          {film.poster && <img src={film.poster} alt="poster" style={{ maxWidth: 200 }} />}
-          <p>Жанры: {film.genres?.join(", ")}</p>
+        <div>
+          {film.poster && <img src={film.poster} alt="poster" />}
+          <div className="filmTextInfoBox">
+            <div className="titleBox">
+                <p>Название:</p>
+                <p>{film.title} {film.year ? `(${film.year})` : ""}</p>
+            </div>
+            <div className="genresBox">
+                <p>Жанры:</p>
+                <div className="genserList">
+                    {film.genres?.map((genre, index) => (
+                        <div key={index} className="genreCard">
+                        {genre}
+                        </div>
+                    ))}
+                </div>
+            </div>
+          </div>
+          
         </div>
       )}
     </div>
