@@ -29,7 +29,9 @@ start();
 import usersRoutes from './routes/users'
 import authRoutes from './routes/auth'
 import parseRoutes from './routes/parse'
+import films from "./routes/films";
 
+app.use("/films", films);
 app.use("/users", usersRoutes);
 app.use("/auth", authRoutes);
 app.use("/api", parseRoutes);
