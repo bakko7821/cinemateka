@@ -28,6 +28,8 @@ start();
 
 import usersRoutes from './routes/users'
 import authRoutes from './routes/auth'
+import parseRoutes from './routes/parse'
 
 app.use("/users", usersRoutes);
 app.use("/auth", authRoutes);
+app.use("/api", parseRoutes);
