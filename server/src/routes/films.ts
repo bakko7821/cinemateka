@@ -6,19 +6,18 @@ const router = express.Router();
 // Добавление нового фильма
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { title, poster, genres } = req.body;
+    const { title, year, poster, genres } = req.body;
 
-    if (!title || !poster || !genres) {
+    if (!title || !year || !poster || !genres) {
       return res.status(400).json({ error: "Не все данные переданы" });
     }
 
-    // Проверка на дубликат по title
-    const existingFilm = await Film.findOne({ title });
+    const existingFilm = await Film.findOne({ title, year });
     if (existingFilm) {
-      return res.status(400).json({ error: "Фильм с таким названием уже существует" });
+      return res.status(400).json({ error: "Фильм с таким названием и годом уже существует" });
     }
 
-    const newFilm: IFilm = new Film({ title, poster, genres });
+    const newFilm: IFilm = new Film({ title, poster, year: Number(year), genres });
     await newFilm.save();
 
     res.status(201).json({ msg: "Фильм добавлен", film: newFilm });
@@ -31,12 +30,23 @@ router.post("/", async (req: Request, res: Response) => {
 // Получение всех фильмов (например, для проверки дубликатов)
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const films = await Film.find();
+    const search = req.query.search as string | undefined;
+
+    let films;
+    if (search) {
+      films = await Film.find({
+        title: { $regex: "^" + search, $options: "i" } // ищем с начала строки, регистр не важен
+      });
+    } else {
+      films = await Film.find();
+    }
+
     res.json(films);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Ошибка сервера" });
   }
 });
+
 
 export default router;
