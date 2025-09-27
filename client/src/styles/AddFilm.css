@@ -1,3 +1,72 @@
 .titleText {
     padding-left: 16px;
 }
+
+.findOrAddFilmBox {
+    background-color: var(--background-card-color);
+    padding: 16px;
+    gap: 24px;
+    border-radius: 16px;
+}
+
+.findOrAddFilmBox .inputsBox {
+    gap: 16px;
+    width: 100%;
+}
+
+.findOrAddFilmBox .inputsBox p {
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.3; 
+    text-transform: uppercase;
+}
+
+.findOrAddFilmBox .addFillmFromLink {
+    width: 100%;
+}
+
+.searchResults {
+    top: 120px;
+    left: 0px;
+    padding: 16px;
+    border-radius: 0px 0px 16px 16px;
+    background-color: var(--background-card-color);
+    gap: 8px;
+    position: absolute;
+}
+
+.searchResults img {
+    border-radius: 8px;
+    height: 64px;
+}
+
+.searchResults .searchFilmCard {
+    gap: 8px;
+}
+
+.searchResults .searchFilmCard p {
+    font-weight: 400;
+    text-transform: none;
+}
+
+.addFillmFromLink {
+    gap: 8px;
+}
+
+.addFillmFromLink button{
+    padding: 8px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+}
+
+.notificationMessage {
+    top: 16px;
+    gap: 8px;
+    position: absolute;
+    padding: 16px;
+    border-radius: 16px;
+    background-color: var(--main-color);
+}
+
+
