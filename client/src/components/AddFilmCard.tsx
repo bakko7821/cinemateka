@@ -15,7 +15,7 @@ export default function AddFilmCard() {
   const [film, setFilm] = useState<FilmData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
-
+  const [, setVisible] = useState(true);
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<FilmData[]>([]);
 
@@ -42,14 +42,12 @@ export default function AddFilmCard() {
       setError(null);
       setMessage(null);
 
-      // 1. Парсим фильм через API
       const res = await axios.post<FilmData>(
         "http://localhost:5000/api/parse-by-api",
         { url }
       );
       setFilm(res.data);
 
-      // 2. Проверяем уникальность по title + year
       const existingRes = await axios.get<{ title: string; year: number }[]>(
         "http://localhost:5000/films"
       );
@@ -62,8 +60,6 @@ export default function AddFilmCard() {
         setError("Фильм с таким названием и годом уже существует");
         return;
       }
-
-      console.log(res.data.year)
 
       const addRes = await axios.post("http://localhost:5000/films", {
         title: res.data.title,
@@ -78,6 +74,23 @@ export default function AddFilmCard() {
       setError(err?.response?.data?.error ?? (err.message ?? "Ошибка при обработке фильма"));
     }
   };
+
+  useEffect(() => {
+    if (message || error) {
+      setVisible(true);
+
+      const timer = setTimeout(() => {
+        setVisible(false);
+        setTimeout(() => {
+          setMessage(null);
+          setError(null);
+        }, 1000);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [message, error]);
+
 
   return (
     <>
@@ -99,12 +112,20 @@ export default function AddFilmCard() {
             <label htmlFor="email">Поиск фильма по названию</label>
           </div>
           {searchResults.length > 0 && (
-            <ul className="searchResults flex-column">
-              {searchResults.map((f, idx) => (
-                <li key={idx} className="searchFilmCard flex-center">
-                  {f.poster && <img src={f.poster} alt="poster"/>}
-                  <p>{f.title}</p>
-                  <p>({f.year})</p>
+            <ul className="searchResults">
+              {searchResults.map((filmItem, idx) => (
+                <li
+                  key={idx}
+                  className="searchFilmCard flex-center"
+                  onClick={() => setFilm(filmItem)} // ✅ теперь правильно
+                >
+                  {filmItem.poster && (
+                    <img src={filmItem.poster} alt="poster" />
+                  )}
+                  <div className="filmText flex-center">
+                    <p>{filmItem.title}</p>
+                    <p>({filmItem.year})</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -112,42 +133,42 @@ export default function AddFilmCard() {
           <p>Или</p>
           <div className="addFillmFromLink flex-center">
             <div className="floating-input">
-            <input
-              className="addFilmInput"
-              value={url}
-              onChange={e => setUrl(e.target.value)}
-              placeholder="Вставьте ссылку на Кинопоиск"
-            />
-            <label htmlFor="email">Вставьте ссылку на Кинопоиск</label>
+              <input
+                className="addFilmInput"
+                value={url}
+                onChange={e => setUrl(e.target.value)}
+                placeholder="Вставьте ссылку на Кинопоиск"
+              />
+              <label htmlFor="email">Вставьте ссылку на Кинопоиск</label>
             </div>
             <button onClick={handleParseAndAdd}>
               <img src="../../public/images/add2.svg" alt="Добавить" />
             </button>
           </div>
-          
-          {error && <div className="notificationMessage error flex-center">
-              <img src="../../public/images/error.svg" alt="" />
-              <p>{error}</p>
-            </div>}
-          {message && <div className="notificationMessage message flex-center">
-              <img src="../../public/images/successful.svg" alt="" />
-              <p>{message}</p>
-            </div>}
         </div>
       </div>
-      <div className="bottomBox flex-center">
-        <div className="choosedFilmInfoBox">
+      {error && <div className="notificationMessage error flex-center">
+          <img src="../../public/images/error.svg" alt="" />
+          <p>{error}</p>
+        </div>}
+      {message && <div className="notificationMessage message flex-center">
+          <img src="../../public/images/successful.svg" alt="" />
+          <p>{message}</p>
+        </div>}
+      <div className="bottomBox">
+        <div className="choosedFilmInfoBox flex-column">
+          <p className="titleText">Информация о фильме:</p>
           {film && (
-            <div>
+            <div className="filmInfo">
               {film.poster && <img src={film.poster} alt="poster" />}
-              <div className="filmTextInfoBox">
+              <div className="filmTextInfoBox flex-column">
                 <div className="titleBox">
-                  <p>Название:</p>
-                  <p>{film.title} {film.year ? `(${film.year})` : ""}</p>
+                  <p className="secondText">Название:</p>
+                  <p className="titleText">{film.title} {film.year ? `(${film.year})` : ""}</p>
                 </div>
-                <div className="genresBox">
-                  <p>Жанры:</p>
-                  <div className="genserList">
+                <div className="genresBox flex-column">
+                  <p className="secondText">Жанры:</p>
+                  <div className="genresList">
                     {film.genres?.map((genre, index) => (
                       <div key={index} className="genreCard">{genre}</div>
                     ))}
@@ -157,8 +178,21 @@ export default function AddFilmCard() {
             </div>
           )}
         </div>
-        <div className="userReviewBox">
-
+        <div className="userReviewBox flex-column">
+          <p className="titleText">Поделитесь мнением</p>
+          <div className="floating-input">
+            <textarea
+              className="addFilmInput"
+              // value={url}
+              // onChange={e => setUrl(e.target.value)}
+              placeholder="Рецензия к фильму"
+            />
+            <label htmlFor="textarea">Рецензия к фильму</label>
+          </div>
+          <button className="sendReviewButton flex-center">
+              <img src="../../public/images/send.svg" alt="Добавить" />
+              Отправить отзыв
+            </button>
         </div>
       </div>
     </>

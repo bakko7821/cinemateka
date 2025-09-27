@@ -57,6 +57,7 @@ export default function LoginCard(): JSX.Element {
   };
 
   return (
+    <>
     <div className="loginBox flex-column flex-center">
       <p className="headingText">Вход</p>
       <button className="useAuthButton flex-center">
@@ -118,5 +119,6 @@ export default function LoginCard(): JSX.Element {
         </div>
       )}
     </div>
+    </>
   );
 }

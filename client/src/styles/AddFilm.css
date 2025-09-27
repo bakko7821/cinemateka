@@ -3,6 +3,8 @@
 }
 
 .findOrAddFilmBox {
+    width: 100%;
+    position: relative;
     background-color: var(--background-card-color);
     padding: 16px;
     gap: 24px;
@@ -50,6 +52,10 @@
     text-transform: none;
 }
 
+.searchResults .searchFilmCard .filmText {
+    gap: 8px;
+}
+
 .addFillmFromLink {
     gap: 8px;
 }
@@ -60,13 +66,86 @@
     background-color: var(--main-color);
 }
 
-.notificationMessage {
-    top: 16px;
-    gap: 8px;
-    position: absolute;
+.bottomBox {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    gap: 16px;
+}
+
+.choosedFilmInfoBox {
+    gap: 16px;
+    background-color: var(--background-card-color);
     padding: 16px;
-    border-radius: 16px;
-    background-color: var(--main-color);
+    border-radius: 32px;
+    max-width: 400px;   /* ограничение ширины */
+    word-wrap: break-word; /* перенос длинного текста */
 }
 
 
+.choosedFilmInfoBox .titleText {
+    padding: 0;
+}
+
+.filmInfo {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.filmInfo img {
+    height: 225px;
+    border-radius: 16px;
+}
+
+.filmInfo .secondText {
+    font-weight: 400;
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    line-height: 1.5;
+    color: var(--secondary-text-color);
+}
+
+.filmInfo .filmTextInfoBox {
+    gap: 8px;
+}
+
+.genresList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.genreCard {
+    background: var(--background-color);
+    padding: 8px;
+    border-radius: 16px;
+    font-weight: 500;
+    white-space: nowrap; /* жанр сам не ломается */
+}
+
+.userReviewBox {
+    width: 100%;
+    padding: 16px;
+    gap: 16px;
+    border-radius: 32px;
+    min-height: 297px;
+    background-color: var(--background-card-color);
+}
+
+.userReviewBox .titleText {
+    padding: 0;
+}
+
+.userReviewBox textarea {
+    resize: vertical;
+    min-height: 180px;
+}
+
+.userReviewBox button {
+    width: 100%;
+    padding: 8px;
+    gap: 8px;
+    background-color: var(--main-color);
+    border-radius: 8px;
+}
