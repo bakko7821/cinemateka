@@ -79,6 +79,10 @@
 
 - Стилизированная первая часть страницы **AddFilmPage.tsx**
 
-# comit 5.7.1
+# commit 5.7.1
 
 - Закончена верстка страницы **AddFilmPage.tsx**
+
+# commit 5.8.1
+
+- Изменен дизайн страницы **AddFilmPage.tsx**

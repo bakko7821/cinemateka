@@ -21,6 +21,7 @@
 .headingBox .followButton {
     background-color: transparent;
     border: 1px var(--main-color) solid;
+    transition: background-color 0.5s;
 }
 
 .headingBox .followButton img {
@@ -29,6 +30,7 @@
 
 .headingBox .followButton:hover {
     background-color: #6C5CD6;
+    transition: background-color 0.5s;
 }
 
 .headingBox .followButton:hover img {
