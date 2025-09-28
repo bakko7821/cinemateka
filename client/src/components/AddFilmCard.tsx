@@ -1,8 +1,10 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode} from "jwt-decode";
+import RatingSelector from "./RatingSelector";
 
 interface FilmData {
+  _id: string;
   success: boolean;
   kpId: string;
   title: string;
@@ -25,6 +27,8 @@ export default function AddFilmCard() {
   const [search, setSearch] = useState<string>("");
   const [searchResults, setSearchResults] = useState<FilmData[]>([]);
   const [isAuth, setIsAuth] = useState(false);
+  const [reviewText, setReviewText] = useState(""); // хранение текста рецензии
+  const [rating, setRating] = useState<number>(0);
 
   useEffect(() => {
     const fetchSearch = async () => {
@@ -107,7 +111,7 @@ export default function AddFilmCard() {
         if (decoded.exp * 1000 > Date.now()) {
           setIsAuth(true);
         } else {
-          localStorage.removeItem("token"); // токен просрочен
+          localStorage.removeItem("token");
         }
       } catch {
         setIsAuth(false);
@@ -115,8 +119,47 @@ export default function AddFilmCard() {
     }
   }, []);
 
-  function postReview() {
-    
+  async function postReview() {
+    try {
+      setError(null);
+      setMessage(null);
+
+      if (!film) {
+        setError("Сначала выберите фильм для рецензии");
+        return;
+      }
+
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("Вы не авторизованы");
+        return;
+      }
+
+      const decoded = jwtDecode<JwtPayload>(token);
+      if (!decoded.id) {
+        setError("Ошибка авторизации: не найден userId");
+        return;
+      }
+
+      if (!reviewText.trim()) {
+        setError("Введите текст рецензии");
+        return;
+      }
+
+      const res = await axios.put("http://localhost:5000/users/review", {
+        userId: decoded.id,
+        filmId: film._id, // или film._id, если он приходит из базы
+        text: reviewText,
+        rating,
+      });
+
+      setMessage(res.data.msg ?? "Рецензия успешно добавлена!");
+      setReviewText("");
+      setRating(0);
+    } catch (e) {
+      const err = e as AxiosError<{ error?: string }>;
+      setError(err?.response?.data?.error ?? "Ошибка при отправке рецензии");
+    }
   }
 
   return (
@@ -219,16 +262,18 @@ export default function AddFilmCard() {
           </div>
           <div className="userReviewBox flex-column">
             <p className="titleText">Поделитесь мнением</p>
+            <RatingSelector value={rating} onChange={setRating} />
             <div className="reviewBox">
               <div className="floating-input">
                 <textarea
                   className="addFilmInput"
-                  onChange={() => postReview()}
+                  value={reviewText} // ✅ контролируемое поле
+                  onChange={(e) => setReviewText(e.target.value)} // обновляем state
                   placeholder="Рецензия к фильму"
                 />
                 <label htmlFor="textarea">Рецензия к фильму</label>
               </div>
-              <button className="sendReviewButton flex-center">
+              <button className="sendReviewButton flex-center" onClick={() => postReview()}>
                 <img src="../../public/images/send.svg" alt="Добавить" />
               </button>
             </div>   

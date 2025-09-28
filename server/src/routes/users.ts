@@ -25,13 +25,14 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 interface AddReviewBody {
   userId: string;
+  filmId: string;
   text: string;
   rating: number;
 }
 
 router.put("/review", async (req: Request<{}, {}, AddReviewBody>, res: Response) => {
     try {
-      const { userId, text, rating } = req.body;
+      const { userId, filmId, text, rating } = req.body;
 
       if (!userId || !text || rating === undefined) {
         return res.status(400).json({ error: "Не все данные переданы" });
@@ -43,7 +44,7 @@ router.put("/review", async (req: Request<{}, {}, AddReviewBody>, res: Response)
       }
 
       const newReview: IReview = {
-        id: new mongoose.Types.ObjectId().toString(),
+        filmId: new mongoose.Types.ObjectId(filmId),
         text,
         rating,
         createdAt: new Date(),

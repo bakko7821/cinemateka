@@ -91,3 +91,8 @@
 
 - В **modules/User.ts** добавлен объект *reviews*
 - В **routes/user.ts** добавлен PUT запрос на добавление нового отзыва.
+
+# commit 6.9.1
+
+- Создан компонент **RatingSelector.tsx**
+- В компоненте **AddFilmCard.tsx** - добавлен запрос отправки рецензии.

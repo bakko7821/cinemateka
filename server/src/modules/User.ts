@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 export interface IReview {
-  id: string;
+  filmId: mongoose.Types.ObjectId;
   text: string;
   rating: number;
   createdAt: Date;
@@ -19,7 +19,11 @@ export interface IUser extends Document {
 }
 
 const reviewSchema = new Schema<IReview>({
-  id: { type: String, default: () => new mongoose.Types.ObjectId().toString() },
+  filmId: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "Film", 
+    required: true 
+  },
   text: { type: String, required: true },
   rating: { type: Number, required: true, min: 0, max: 10 },
   createdAt: { type: Date, default: Date.now },
