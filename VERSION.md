@@ -86,3 +86,8 @@
 # commit 5.8.1
 
 - Изменен дизайн страницы **AddFilmPage.tsx**
+
+# commit 6.8.1
+
+- В **modules/User.ts** добавлен объект *reviews*
+- В **routes/user.ts** добавлен PUT запрос на добавление нового отзыва.

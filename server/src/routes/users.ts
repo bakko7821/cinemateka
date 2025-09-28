@@ -1,10 +1,10 @@
-import express from "express";
-import User from "../modules/User";
+import express, { Request, Response } from "express";
+import User, { IReview } from "../modules/User";
+import mongoose from "mongoose";
 
 const router = express.Router();
 
-// Получить юзера по id (без авторизации)
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id).select("-password");
@@ -22,5 +22,45 @@ router.get("/:id", async (req, res) => {
     }
   }
 });
+
+interface AddReviewBody {
+  userId: string;
+  text: string;
+  rating: number;
+}
+
+router.put("/review", async (req: Request<{}, {}, AddReviewBody>, res: Response) => {
+    try {
+      const { userId, text, rating } = req.body;
+
+      if (!userId || !text || rating === undefined) {
+        return res.status(400).json({ error: "Не все данные переданы" });
+      }
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ error: "Пользователь не найден" });
+      }
+
+      const newReview: IReview = {
+        id: new mongoose.Types.ObjectId().toString(),
+        text,
+        rating,
+        createdAt: new Date(),
+      };
+
+      user.reviews.push(newReview);
+      await user.save();
+
+      return res.status(200).json({ msg: "Рецензия добавлена", reviews: user.reviews });
+    } catch (err: unknown) {
+      console.error(err);
+      if (err instanceof Error) {
+        return res.status(500).json({ error: err.message });
+      }
+      return res.status(500).json({ error: "Неизвестная ошибка" });
+    }
+  }
+);
 
 export default router;

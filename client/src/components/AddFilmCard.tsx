@@ -115,6 +115,10 @@ export default function AddFilmCard() {
     }
   }, []);
 
+  function postReview() {
+    
+  }
+
   return (
     <>
     <p className="titleText">Добавление рецезнии</p>
@@ -219,8 +223,7 @@ export default function AddFilmCard() {
               <div className="floating-input">
                 <textarea
                   className="addFilmInput"
-                  // value={url}
-                  // onChange={e => setUrl(e.target.value)}
+                  onChange={() => postReview()}
                   placeholder="Рецензия к фильму"
                 />
                 <label htmlFor="textarea">Рецензия к фильму</label>
