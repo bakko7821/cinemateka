@@ -75,3 +75,69 @@
     width: 100%;
     gap: 16px;
 }
+
+.favoriteGenre .titleText, 
+.favoriteFilms .titleText, 
+.userReviews .titleText {
+    padding: 0;
+}
+
+.favoriteGenre .infoBox {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, max-content));
+    justify-content: start;
+    align-items: start;
+    gap: 8px;
+}
+
+.favoriteGenre .infoBox .genreCard {
+    width: fit-content;
+    gap: 8px;
+    color: var(--secondary-text-color);
+    background-color: var(--background-card-color);
+    padding: 8px;
+    border-radius: 12px;
+}
+
+.favoriteGenre .infoBox .genreCard .genreName {
+    text-transform: capitalize;
+}
+
+.favoriteGenre .infoBox .genreCard span {
+    background-color: var(--secondary-text-color);
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+}
+
+.favoriteFilms .infoBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding-bottom: 8px;
+    gap: 16px;
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+}
+
+.favoriteFilms .infoBox::-webkit-scrollbar {
+  height: 4px;
+}
+
+.favoriteFilms .infoBox::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.favoriteFilms .infoBox::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 20px;
+  border: none;
+}
+
+.favoriteFilms .infoBox img {
+    border-radius: 12px;
+    height: 220px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

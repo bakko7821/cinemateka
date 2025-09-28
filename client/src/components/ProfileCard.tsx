@@ -12,11 +12,31 @@ interface User {
   image: string;
 }
 
+interface GenresResponse {
+    genres: GenreStat[];
+}
+
+interface GenreStat {
+    genre: string;
+    count: number;
+}
+
+interface Film {
+  _id: string;
+  title: string;
+  poster: string;
+  year: number;
+}
+
 export default function ProfileCard() : JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [user, setUser] = useState<User | null>(null);
+    const [films, setFilms] = useState<Film[]>([]);
     const [isAuth, setIsAuth] = useState(false)
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
+    const [genres, setGenres] = useState<GenreStat[]>([]); // по умолчанию пустой массив
+    const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         if (!id) return;
@@ -35,6 +55,45 @@ export default function ProfileCard() : JSX.Element {
     useEffect(() => {
         setUserAvatar(user?.image ? user.image : null);
     }, [user]);
+
+    useEffect(() => {
+    if (!id) return;
+
+    const fetchGenres = async () => {
+        try {
+        setLoading(true);
+
+        const res = await axios.get<GenresResponse>(`http://localhost:5000/users/${id}/genres`);
+        setGenres(res.data.genres);
+
+        } catch (err) {
+        setError("Ошибка при загрузке жанров");
+        console.error(err);
+        } finally {
+        setLoading(false);
+        }
+    };
+
+    fetchGenres();
+    }, [id]);
+
+    useEffect(() => {
+        if (!id) return;
+
+        const fetchFilms = async () => {
+        try {
+            const res = await axios.get<Film[]>(`http://localhost:5000/users/${id}/films`);
+            setFilms(res.data);
+        } catch (err) {
+            console.error("Ошибка при загрузке фильмов:", err);
+        }
+        };
+
+        fetchFilms();
+    }, [id]);
+
+    if (loading) return <p>Загрузка...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <>
@@ -74,13 +133,23 @@ export default function ProfileCard() : JSX.Element {
             <div className="favoriteGenre flex-column">
                 <p className="titleText">Любимые жанры</p>
                 <div className="infoBox">
-
+                {Array.isArray(genres) && genres.map((g, idx) => (
+                    <div className="genreCard flex-center" key={idx}>
+                        <p className="genreName">{g.genre}</p>
+                        <span></span>
+                        <p className="genreCount">{g.count}</p>
+                    </div>
+                ))}
                 </div>
             </div>
             <div className="favoriteFilms flex-column">
                 <p className="titleText">Любимые фильмы</p>
                 <div className="infoBox">
-
+                {films.map(film => (
+                    <div className="filmCard" key={film._id}>
+                        <img src={film.poster} alt="" />
+                    </div>
+                ))}
                 </div>
             </div>
             <div className="userReviews flex-column">

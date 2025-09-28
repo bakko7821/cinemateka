@@ -148,7 +148,7 @@ export default function AddFilmCard() {
 
       const res = await axios.put("http://localhost:5000/users/review", {
         userId: decoded.id,
-        filmId: film._id, // или film._id, если он приходит из базы
+        filmId: film._id,
         text: reviewText,
         rating,
       });
