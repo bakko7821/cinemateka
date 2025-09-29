@@ -82,6 +82,10 @@
     padding: 0;
 }
 
+.userReviews .infoBox{
+    gap: 16px;
+}
+
 .favoriteGenre .infoBox {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, max-content));
@@ -135,11 +139,15 @@
   border: none;
 }
 
-.favoriteFilms .infoBox img {
+.favoriteFilms .filmCard .filmPoster {
     border-radius: 12px;
     height: 220px;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.favoriteFilms .filmCard {
+    position: relative;
 }
 
 .nullMessage {
@@ -147,4 +155,59 @@
     font-weight: 500;
     font-size: clamp(1rem, 2vh, 1.5rem);
     line-height: 1.3;
+}
+
+.filmRaiting {
+    gap: 8px;
+    position: absolute;
+    bottom: 0;
+    left: 0;    
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    padding: 4px 8px;
+}
+
+.filmRaiting img {
+    width: 24px;
+}
+
+.reviewCard {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    width: 100%;
+    background-color: var(--background-card-color);
+    gap: 16px;
+    padding: 16px;
+    border-radius: 28px;
+}
+
+.reviewCard .filmPoster {
+    height: 220px;
+    border-radius: 12px;
+}
+
+.reviewCard .reviewAllInfo {
+    width: 100%;
+    gap: 16px;
+}
+
+.reviewCard .reviewAllInfo .headingBox .reviewInfo {
+    gap: 16px;
+}
+
+.reviewCard .reviewAllInfo .headingBox .titleText {
+    width: fit-content;
+}
+
+.reviewCard .reviewAllInfo .headingBox .reviewInfo span {
+    height: 24px;
+    width: 2px;
+    background-color: var(--text-color);
+}
+
+.reviewCard .reviewAllInfo .headingBox .reviewInfo .start {
+    gap: 4px;
 }

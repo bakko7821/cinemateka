@@ -176,9 +176,11 @@ export default function ProfileCard() : JSX.Element {
                 <div className="infoBox">
                     {Array.isArray(reviews) && reviews.length > 0 ? (
                     reviews.map(review => (
-                        <div className="filmCard" key={review._id}>
-                            {review.film?.poster && <img src={review.film.poster} alt={review.film.title} />}
-                            <p>{review.rating}/10</p>
+                        <div className="filmCard flex-column" key={review._id}>
+                            {review.film?.poster && <img className="filmPoster" src={review.film.poster} alt={review.film.title} />}
+                            <div className="filmRaiting flex-center">
+                                <p>{review.rating}/10</p>
+                            </div>
                         </div>
                     ))
                     ) : (
@@ -191,8 +193,30 @@ export default function ProfileCard() : JSX.Element {
                 <div className="infoBox flex-column">
                 {Array.isArray(reviews) && reviews.length > 0 ? (
                     reviews.map(review => (
-                        <div className="filmCard" key={review.filmId}>
-                        <p>{review.text}</p>
+                        <div className="reviewCard" key={review.filmId}>
+                            {review.film?.poster && <img className="filmPoster" src={review.film.poster} alt={review.film.title} />}
+                            <div className="reviewAllInfo flex-column">
+                                <div className="headingBox flex-between">
+                                    <div className="reviewInfo flex-center">
+                                        <p className="titleText">{review.film.title} ({review.film.year})</p>
+                                        <span></span>
+                                        <div className="stars flex-center">
+                                            {Array.from({ length: 10 }).map((_, index) => (
+                                                <img
+                                                key={index}
+                                                src={index < review.rating ? "/images/activeStar.svg" : "/images/nonActiveStar.svg"}
+                                                alt={index < review.rating ? "Активная звезда" : "Пустая звезда"}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <button className="goToReviewButton flex-center">
+                                        Читать подробно
+                                        <img src="../../public/images/right-arrow.svg" alt="" />
+                                    </button>
+                                </div>
+                                <p className="reviewText">{review.text}</p>
+                            </div>
                         </div>
                     ))
                 ) : (

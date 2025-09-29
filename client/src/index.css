@@ -212,6 +212,21 @@ body {
   position: relative;
   background-color: var(--background-color);
   color: var(--text-color);
+  overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--main-color);
+  border-radius: 20px;
+  border: none;
 }
 
 .flex-center {
