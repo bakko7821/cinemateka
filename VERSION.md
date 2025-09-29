@@ -136,3 +136,7 @@
 - В **components/Main.tsx** был добавлен Route на **pages/ReviewPage.tsx**
 - Создан **pages/ReviewPage.tsx**
 - Создан **components/ReviewCard.tsx**
+
+# commit 9.14.1
+
+- Готова страница **pages/ReviewPage.tsx**

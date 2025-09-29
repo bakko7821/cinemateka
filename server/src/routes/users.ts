@@ -143,21 +143,31 @@ router.get("/review/:id", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Некорректный ID" });
     }
 
+    // достаем пользователя вместе с нужным отзывом
     const user = await User.findOne(
       { "reviews._id": new Types.ObjectId(id) },
-      { "reviews.$": 1 }
-    );
+      { firstname: 1, lastname: 1, username: 1, image: 1, "reviews.$": 1 }
+    ).lean();
 
     if (!user || !user.reviews || user.reviews.length === 0) {
       return res.status(404).json({ error: "Рецензия не найдена" });
     }
 
-    const review = user.reviews[0]; // одна рецензия
+    const review = user.reviews[0];
     const film = await Film.findById(review.filmId).lean();
 
     return res.json({
-      ...review,
-      film: film || null,
+      review: {
+        ...review,
+        film: film || null,
+      },
+      author: {
+        _id: user._id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        username: user.username,
+        image: user.image,
+      },
     });
   } catch (err: unknown) {
     return res
@@ -165,6 +175,7 @@ router.get("/review/:id", async (req: Request, res: Response) => {
       .json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
   }
 });
+
 
 
 export default router;

@@ -1,0 +1,91 @@
+.reviewPage {
+    display: flex;
+    width: 100%;
+    gap: 16px;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background-color: var(--main-color);
+    border-radius: 28px;
+    transition: background-color 0.5s;
+}
+
+.backButton img {
+    max-width: none;
+}
+
+.backButton:hover {
+    background-color: #8f82e0;
+    transition: background-color 0.5s;
+}
+
+.reviewInfoBox {
+    width: 100%;
+    padding: 16px;
+    border-radius: 28px;
+    background-color: var(--background-card-color);
+}
+
+.reviewInfoBox {
+    gap: 16px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.reviewInfoBox .headingBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+    width: 100%;
+}
+
+.reviewInfoBox .headingBox span {
+    width: 1px;
+    background-color: var(--text-color);
+    height: 36px;
+}
+
+.reviewInfoBox .userInfo {
+    padding: 8px;
+    gap: 8px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 12px;
+    transition: background-color 0.5s;
+}
+
+.reviewInfoBox .userInfo:hover {
+    background-color: #31333e;
+    transition: background-color 0.5s;
+}
+
+.reviewInfoBox .userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+}
+
+.reviewInfoBox .headingBox .userInfo .fullNameUser{
+    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.3;
+}
+
+.reviewInfoBox .headingBox .userInfo .userName{
+    line-height: 1.5;
+    font-size: clamp(0.6rem, 2vh, 0.8rem);
+    font-weight: 400;
+    color: var(--secondary-text-color);
+}
+
+.reviewInfoBox .reviewText {
+    padding-left: 8px;
+}

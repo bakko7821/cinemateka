@@ -2,25 +2,40 @@ import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
-interface Reviews {
-    filmId: string;
-    text: string;
-    rating: number;
-    createdAt: Date;
-    _id: string;
-    film: Film;
+interface ReviewResponse {
+  review: Review;
+  author: Author;
+}
+
+interface Review {
+  _id: string;
+  filmId: string;
+  text: string;
+  rating: number;
+  createdAt: Date;
+  film: Film | null;
 }
 
 interface Film {
-    _id: string;
-    title: string;
-    poster: string;
-    year: number;
+  _id: string;
+  title: string;
+  poster: string;
+  year: number;
+  genres?: string[];
+}
+
+interface Author {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  image: string;
 }
 
 export default function ReviewCard() : JSX.Element {
     const { id } = useParams<{ id: string }>();
-    const [review, setReview] = useState<Reviews | null>(null)
+    const [data, setData] = useState<ReviewResponse  | null>(null)
+    const [userAvatar, setUserAvatar] = useState<string | null>(null);
     const navigate = useNavigate()
 
     useEffect(()=> {
@@ -28,8 +43,8 @@ export default function ReviewCard() : JSX.Element {
 
         const fetchReviews = async () => {
             try {
-                const res = await axios.get<Reviews>(`http://localhost:5000/users/review/${id}`)
-                setReview(res.data)
+                const res = await axios.get<ReviewResponse>(`http://localhost:5000/users/review/${id}`)
+                setData(res.data)
             } catch (err) {
                 console.log("Ошибка при загрузке рецензий:", err)
             }
@@ -38,18 +53,79 @@ export default function ReviewCard() : JSX.Element {
         fetchReviews()
     }, [id])
 
+    useEffect(() => {
+        setUserAvatar(data?.author.image ? data.author.image : null);
+    }, [data?.author]);
+
     function goToBack() {
         navigate(-1)
     }
 
     return (
-        <>
-            <button onClick={() => goToBack()}>Go back</button>
-            <div className="reviewCard">
-               {review?.text}
-               {review?.film.title}
+        <div className="reviewPage">
+            <button className="backButton" onClick={() => goToBack()}>
+                <img src="../../public/images/left-arrow.svg" alt="" />
+            </button> 
+            <div className="choosedFilmInfoBox flex-column">
+                <p className="titleText">Информация о фильме:</p>
+                {data?.review.film && (
+                    <div className="filmInfo">
+                    {data?.review.film.poster && <img src={data?.review.film.poster} alt="poster" />}
+                    <div className="filmTextInfoBox flex-column">
+                        <div className="titleBox">
+                        <p className="secondText">Название:</p>
+                        <p className="titleText">{data?.review.film.title} {data?.review.film.year ? `(${data?.review.film.year})` : ""}</p>
+                        </div>
+                        <div className="genresBox flex-column">
+                        <p className="secondText">Жанры:</p>
+                        <div className="genresList">
+                            {data?.review.film.genres?.map((genre, index) => (
+                            <div key={index} className="genreCard">{genre}</div>
+                            ))}
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                )}
             </div>
-        </>
-        
+            <div className="reviewInfoBox">
+                <div className="headingBox">
+                    <div className="userInfo flex-center" onClick={() => navigate(`/profile/${data?.author._id}`)}>
+                        {userAvatar ? (
+                            <img className="userAvatar"
+                                src={`http://localhost:5000${data?.author.image}`}
+                                alt="avatar" />
+                        ) : (
+                            <div className="userAvatar flex-center">
+                                <p>{data?.author.username.charAt(0)}</p>
+                            </div>
+                        )}
+                        <div className="textBox">
+                            <p className="fullNameUser">{data?.author.firstname} {data?.author.lastname}</p>
+                            <p className="userName">@{data?.author.username}</p>
+                        </div>
+                    </div>
+                    <span></span>
+                    <div className="stars flex-center">
+                        {Array.from({ length: 10 }).map((_, index) => (
+                        <img
+                            key={index}
+                            src={
+                            index < (data?.review.rating ?? 0) // 👈 тут rating
+                                ? "/images/activeStar.svg"
+                                : "/images/nonActiveStar.svg"
+                            }
+                            alt={
+                            index < (data?.review.rating ?? 0)
+                                ? "Активная звезда"
+                                : "Пустая звезда"
+                            }
+                        />
+                        ))}
+                    </div>
+                </div>
+                <p className="reviewText">{data?.review.text}</p>
+            </div>
+        </div>
     )
 }
