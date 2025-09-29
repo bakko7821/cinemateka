@@ -140,3 +140,7 @@
 # commit 9.14.1
 
 - Готова страница **pages/ReviewPage.tsx**
+
+# commit 9.14.2
+
+- На будущее заготовленна кнопка **editProfileButton**

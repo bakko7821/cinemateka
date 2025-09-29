@@ -4,7 +4,7 @@ import axios from "axios";
 import '../styles/Profile.css'
 
 interface User {
-  id: string;
+  _id: string;
   firstname: string;
   lastname: string;
   username: string;
@@ -103,10 +103,6 @@ export default function ProfileCard() : JSX.Element {
         fetchReviews();
     }, [id]);
 
-    function goToReview(id: string) {
-        navigate(`/review/${id}`)
-    }
-
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>{error}</p>;
 
@@ -129,7 +125,7 @@ export default function ProfileCard() : JSX.Element {
                     </div>
                 </div>
                 {isAuth ? (
-                    <button className="editProfileButton flex-center">
+                    <button onClick={() => navigate(`/edit/${user?._id}`)} className="editProfileButton flex-center">
                         <img src="../../public/images/edit.svg" alt="" />
                         Изменить профиль
                     </button>
@@ -169,7 +165,7 @@ export default function ProfileCard() : JSX.Element {
                         .slice() // чтобы не мутировать исходный массив
                         .sort((a, b) => b.rating - a.rating) // сортировка по убыванию
                         .map(review => (
-                        <div className="filmCard flex-column" key={review._id}>
+                        <div className="filmCard flex-column" onClick={() => navigate(`/review/${review._id}`)} key={review._id}>
                             {review.film?.poster && (
                             <img
                                 className="filmPoster"
@@ -209,7 +205,7 @@ export default function ProfileCard() : JSX.Element {
                                             ))}
                                         </div>
                                     </div>
-                                    <button className="goToReviewButton flex-center" onClick={() => goToReview(review._id)}>
+                                    <button className="goToReviewButton flex-center" onClick={() => navigate(`/review/${review._id}`)}>
                                         Читать подробно
                                         <img src="../../public/images/right-arrow.svg" alt="" />
                                     </button>

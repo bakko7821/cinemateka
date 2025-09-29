@@ -147,6 +147,7 @@
 }
 
 .favoriteFilms .filmCard {
+    cursor: pointer;
     position: relative;
 }
 
