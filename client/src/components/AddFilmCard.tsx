@@ -79,6 +79,10 @@ export default function AddFilmCard() {
         genres: res.data.genres ?? [],
       });
 
+      setFilm({
+        ...res.data,
+        _id: addRes.data.film._id,
+      });
       setMessage(addRes.data.msg ?? "Фильм успешно добавлен!");
     } catch (e) {
       const err = e as AxiosError<{ error?: string }>;

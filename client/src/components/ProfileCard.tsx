@@ -28,10 +28,20 @@ interface Film {
   year: number;
 }
 
+interface Reviews {
+    filmId: string;
+    text: string;
+    rating: number;
+    createdAt: Date;
+    _id: string;
+    film: Film; // добавляем вложенный объект фильма
+}
+
 export default function ProfileCard() : JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [user, setUser] = useState<User | null>(null);
-    const [films, setFilms] = useState<Film[]>([]);
+    // const [films, setFilms] = useState<Film[]>([]);
+    const [reviews, setReviews] = useState<Reviews[]>([]);
     const [isAuth, setIsAuth] = useState(false)
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
     const [genres, setGenres] = useState<GenreStat[]>([]); // по умолчанию пустой массив
@@ -77,19 +87,34 @@ export default function ProfileCard() : JSX.Element {
     fetchGenres();
     }, [id]);
 
+    // useEffect(() => {
+    //     if (!id) return;
+
+    //     const fetchFilms = async () => {
+    //     try {
+    //         const res = await axios.get<Film[]>(`http://localhost:5000/users/${id}/films`);
+    //         setFilms(res.data);
+    //     } catch (err) {
+    //         console.error("Ошибка при загрузке фильмов:", err);
+    //     }
+    //     };
+
+    //     fetchFilms();
+    // }, [id]);
+
     useEffect(() => {
         if (!id) return;
 
-        const fetchFilms = async () => {
-        try {
-            const res = await axios.get<Film[]>(`http://localhost:5000/users/${id}/films`);
-            setFilms(res.data);
-        } catch (err) {
-            console.error("Ошибка при загрузке фильмов:", err);
-        }
+        const fetchReviews = async () => {
+            try {
+                const res = await axios.get<Reviews[]>(`http://localhost:5000/users/${id}/reviews`)
+                setReviews(res.data);
+            } catch (err) {
+                console.log("Ошибка при загрузке рецензий:", err)
+            }
         };
 
-        fetchFilms();
+        fetchReviews();
     }, [id]);
 
     if (loading) return <p>Загрузка...</p>;
@@ -133,29 +158,46 @@ export default function ProfileCard() : JSX.Element {
             <div className="favoriteGenre flex-column">
                 <p className="titleText">Любимые жанры</p>
                 <div className="infoBox">
-                {Array.isArray(genres) && genres.map((g, idx) => (
-                    <div className="genreCard flex-center" key={idx}>
+                {Array.isArray(genres) && genres.length > 0 ? (
+                    genres.map((g, idx) => (
+                        <div className="genreCard flex-center" key={idx}>
                         <p className="genreName">{g.genre}</p>
                         <span></span>
                         <p className="genreCount">{g.count}</p>
-                    </div>
-                ))}
+                        </div>
+                    ))
+                ) : (
+                    <p className="nullMessage">У пользователя нет любимых жанров</p>
+                )}
                 </div>
             </div>
             <div className="favoriteFilms flex-column">
                 <p className="titleText">Любимые фильмы</p>
                 <div className="infoBox">
-                {films.map(film => (
-                    <div className="filmCard" key={film._id}>
-                        <img src={film.poster} alt="" />
-                    </div>
-                ))}
+                    {Array.isArray(reviews) && reviews.length > 0 ? (
+                    reviews.map(review => (
+                        <div className="filmCard" key={review._id}>
+                            {review.film?.poster && <img src={review.film.poster} alt={review.film.title} />}
+                            <p>{review.rating}/10</p>
+                        </div>
+                    ))
+                    ) : (
+                    <p className="nullMessage">У пользователя нет рецензий</p>
+                    )}
                 </div>
             </div>
             <div className="userReviews flex-column">
                 <p className="titleText">Рецензии</p>
                 <div className="infoBox flex-column">
-
+                {Array.isArray(reviews) && reviews.length > 0 ? (
+                    reviews.map(review => (
+                        <div className="filmCard" key={review.filmId}>
+                        <p>{review.text}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p className="nullMessage">У пользователя нет рецензий</p>
+                )}
                 </div>
             </div>
         </>
