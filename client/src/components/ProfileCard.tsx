@@ -1,5 +1,5 @@
 import { useState, useEffect, type JSX } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/Profile.css'
 
@@ -34,19 +34,20 @@ interface Reviews {
     rating: number;
     createdAt: Date;
     _id: string;
-    film: Film; // добавляем вложенный объект фильма
+    film: Film;
 }
 
 export default function ProfileCard() : JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [user, setUser] = useState<User | null>(null);
-    // const [films, setFilms] = useState<Film[]>([]);
     const [reviews, setReviews] = useState<Reviews[]>([]);
     const [isAuth, setIsAuth] = useState(false)
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
-    const [genres, setGenres] = useState<GenreStat[]>([]); // по умолчанию пустой массив
+    const [genres, setGenres] = useState<GenreStat[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (!id) return;
@@ -87,21 +88,6 @@ export default function ProfileCard() : JSX.Element {
     fetchGenres();
     }, [id]);
 
-    // useEffect(() => {
-    //     if (!id) return;
-
-    //     const fetchFilms = async () => {
-    //     try {
-    //         const res = await axios.get<Film[]>(`http://localhost:5000/users/${id}/films`);
-    //         setFilms(res.data);
-    //     } catch (err) {
-    //         console.error("Ошибка при загрузке фильмов:", err);
-    //     }
-    //     };
-
-    //     fetchFilms();
-    // }, [id]);
-
     useEffect(() => {
         if (!id) return;
 
@@ -116,6 +102,10 @@ export default function ProfileCard() : JSX.Element {
 
         fetchReviews();
     }, [id]);
+
+    function goToReview(id: string) {
+        navigate(`/review/${id}`)
+    }
 
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>{error}</p>;
@@ -175,14 +165,23 @@ export default function ProfileCard() : JSX.Element {
                 <p className="titleText">Любимые фильмы</p>
                 <div className="infoBox">
                     {Array.isArray(reviews) && reviews.length > 0 ? (
-                    reviews.map(review => (
+                    reviews
+                        .slice() // чтобы не мутировать исходный массив
+                        .sort((a, b) => b.rating - a.rating) // сортировка по убыванию
+                        .map(review => (
                         <div className="filmCard flex-column" key={review._id}>
-                            {review.film?.poster && <img className="filmPoster" src={review.film.poster} alt={review.film.title} />}
+                            {review.film?.poster && (
+                            <img
+                                className="filmPoster"
+                                src={review.film.poster}
+                                alt={review.film.title}
+                            />
+                            )}
                             <div className="filmRaiting flex-center">
-                                <p>{review.rating}/10</p>
+                            <p>{review.rating}/10</p>
                             </div>
                         </div>
-                    ))
+                        ))
                     ) : (
                     <p className="nullMessage">У пользователя нет рецензий</p>
                     )}
@@ -210,7 +209,7 @@ export default function ProfileCard() : JSX.Element {
                                             ))}
                                         </div>
                                     </div>
-                                    <button className="goToReviewButton flex-center">
+                                    <button className="goToReviewButton flex-center" onClick={() => goToReview(review._id)}>
                                         Читать подробно
                                         <img src="../../public/images/right-arrow.svg" alt="" />
                                     </button>

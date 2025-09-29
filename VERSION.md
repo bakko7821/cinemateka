@@ -124,3 +124,15 @@
 # commit 8.12.1
 
 - Готова страница **ProfileCard.tsx** - отображаются любимые жанры, любимые фильмы и список всех рецензий.
+
+# commit 9.13.1
+
+### Серверная часть
+
+- В **routes/user.ts** был добавлен роут **/review/:id**, в котором мы получаем саму рецензию
+
+### Клиентская часть
+
+- В **components/Main.tsx** был добавлен Route на **pages/ReviewPage.tsx**
+- Создан **pages/ReviewPage.tsx**
+- Создан **components/ReviewCard.tsx**
