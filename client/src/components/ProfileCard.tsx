@@ -70,22 +70,22 @@ export default function ProfileCard() : JSX.Element {
     useEffect(() => {
     if (!id) return;
 
-    const fetchGenres = async () => {
-        try {
-        setLoading(true);
+        const fetchGenres = async () => {
+            try {
+            setLoading(true);
 
-        const res = await axios.get<GenresResponse>(`http://localhost:5000/users/${id}/genres`);
-        setGenres(res.data.genres);
+            const res = await axios.get<GenresResponse>(`http://localhost:5000/users/${id}/genres`);
+            setGenres(res.data.genres);
 
-        } catch (err) {
-        setError("Ошибка при загрузке жанров");
-        console.error(err);
-        } finally {
-        setLoading(false);
-        }
-    };
+            } catch (err) {
+            setError("Ошибка при загрузке жанров");
+            console.error(err);
+            } finally {
+            setLoading(false);
+            }
+        };
 
-    fetchGenres();
+        fetchGenres();
     }, [id]);
 
     useEffect(() => {
@@ -125,7 +125,7 @@ export default function ProfileCard() : JSX.Element {
                     </div>
                 </div>
                 {isAuth ? (
-                    <button onClick={() => navigate(`/edit/${user?._id}`)} className="editProfileButton flex-center">
+                    <button onClick={() => navigate(`/profile/${user?._id}/edit`)} className="editProfileButton flex-center">
                         <img src="../../public/images/edit.svg" alt="" />
                         Изменить профиль
                     </button>

@@ -170,12 +170,19 @@ router.get("/review/:id", async (req: Request, res: Response) => {
       },
     });
   } catch (err: unknown) {
-    return res
-      .status(500)
-      .json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
+    return res.status(500).json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
   }
 });
 
+router.put("/:id/set", async (req: Request, res: Response) => {
+  try {
+    const {id} = req.params
+    const user = await User.findById(id).select("-password")
+
+  } catch (err: unknown) {
+    return res.status(500).json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
+  }
+})
 
 
 export default router;

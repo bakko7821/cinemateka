@@ -7,6 +7,7 @@ import RecoveryPasswordPage from "../pages/RecoveryPasswordPage";
 import ProfilePage from "../pages/ProfilePage";
 import AddFilmPage from "../pages/AddFilmPage";
 import ReviewPage from "../pages/ReviewPage";
+import EditProfilePage from "../pages/EditProfilePage";
 
 function Main() {
     return (
@@ -17,6 +18,7 @@ function Main() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/recovery-password" element={<RecoveryPasswordPage />} />
                 <Route path="/profile/:id" element={<ProfilePage />} />
+                <Route path="/profile/:id/edit" element={<EditProfilePage />}/>
                 <Route path="/add" element={<AddFilmPage />} />
                 <Route path="/review/:id" element={<ReviewPage />}/>
             </Routes>

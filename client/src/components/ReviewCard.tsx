@@ -57,13 +57,9 @@ export default function ReviewCard() : JSX.Element {
         setUserAvatar(data?.author.image ? data.author.image : null);
     }, [data?.author]);
 
-    function goToBack() {
-        navigate(-1)
-    }
-
     return (
         <div className="reviewPage">
-            <button className="backButton" onClick={() => goToBack()}>
+            <button className="backButton" onClick={() => navigate(-1)}>
                 <img src="../../public/images/left-arrow.svg" alt="" />
             </button> 
             <div className="choosedFilmInfoBox flex-column">
