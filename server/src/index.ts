@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import path from "path";
 
 dotenv.config();
 
@@ -35,3 +36,4 @@ app.use("/films", films);
 app.use("/users", usersRoutes);
 app.use("/auth", authRoutes);
 app.use("/api", parseRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));

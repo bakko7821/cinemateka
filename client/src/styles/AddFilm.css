@@ -118,6 +118,11 @@
     top: -24px;
 }
 
+.reviewBox .floating-input textarea:focus + label,
+.reviewBox .floating-input textarea:not(:placeholder-shown) +label {
+    top: -24px;
+}
+
 
 .choosedFilmInfoBox .titleText {
     padding: 0;
@@ -125,6 +130,7 @@
 
 .choosedFilmInfoBox {
     min-width: 460px;
+    min-height: 395px;
 }
 
 .filmInfo {
@@ -172,17 +178,32 @@
     background-color: var(--background-card-color);
 }
 
+.userReviewBox .titleText {
+    padding: 0;
+}
+
+.userReviewBox .headingBox {
+    width: 100%;
+}
+
+.userReviewBox .headingBox button {
+    background-color: transparent;
+}
+
+.userReviewBox .headingBox button img {
+    max-width: none;
+}
+
 .reviewBox {
-    display: flex;
     gap: 8px;
-    justify-content: center;
-    align-items: start;
 }
 
 .reviewBox textarea {
+    background-color: var(--background-color);
     height: fit-content;
     width: 100%;
     resize: vertical;
+    overflow: hidden;
 }
 
 .userReviewBox .sendReviewButton {

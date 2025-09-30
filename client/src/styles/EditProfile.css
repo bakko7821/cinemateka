@@ -6,13 +6,38 @@
     gap: 16px;
 }
 
+.headingPageInfo.flex-between {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.headingPageInfo.flex-between .saveChangesButton {
+    gap: 8px;
+    background-color: #009912;
+    padding: 8px;
+    border-radius: 12px;
+    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-weight: 500;
+    transition: background-color 0.5s;
+}
+
+.headingPageInfo.flex-between .saveChangesButton:hover {
+    background-color: #00660C;
+}
+
 .editProfilePage .editProfileBox {
+    display: flex;
     align-items: start;
-    justify-content: center;
+    justify-content: start;
+    gap: 16px;
     padding: 16px;
     border-radius: 28px;
     width: 100%;
     background-color: var(--background-card-color);
+}
+
+.editProfilePage .editProfileBox .infoForm {
+    gap: 24px;
 }
 
 .backButton {
@@ -107,4 +132,17 @@
 }
 .input-file:active span {
 	background-color: #8f82e0;
+}
+
+.userTextInfo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 16px;
+}
+
+.userTextInfo span {
+    width: 1px;
+    height: 24px;
+    background-color: var(--text-color);
 }

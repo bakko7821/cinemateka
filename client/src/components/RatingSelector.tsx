@@ -10,7 +10,7 @@ export default function RatingSelector({
   const [hoverValue, setHoverValue] = useState<number | null>(null);
 
   return (
-    <div className="ratingBox flex">
+    <div className="ratingBox flex-center">
       {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => {
         // определяем, активная ли картинка
         const isActive = hoverValue !== null ? num <= hoverValue : num <= value;

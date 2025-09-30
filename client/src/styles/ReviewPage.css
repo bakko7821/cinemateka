@@ -1,16 +1,36 @@
+.headingPageInfo {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    gap: 8px;
+}
+
+.headingPageInfo .titleText {
+    padding: 0;
+}
+
+.headingPageInfo .titleText span{ 
+    color: var(--main-color);
+}
+
 .reviewPage {
     display: flex;
     width: 100%;
     gap: 16px;
 }
 
-.backButton {
+.reviewPage .choosedFilmInfoBox {
+    min-height: auto;
+}
+
+.headingPageInfo .backButton {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 8px;
-    background-color: var(--main-color);
-    border-radius: 28px;
+    background-color: transparent;
+    border-radius: 12px;
     transition: background-color 0.5s;
 }
 

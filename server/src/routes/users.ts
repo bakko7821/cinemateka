@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import User, { IReview } from "../modules/User";
 import Film from "../modules/Film";
 import { Types } from "mongoose";
+import { upload } from "../middleware/multer";
 
 const router = express.Router();
 
@@ -174,15 +175,34 @@ router.get("/review/:id", async (req: Request, res: Response) => {
   }
 });
 
-router.put("/:id/set", async (req: Request, res: Response) => {
+router.put("/:id/set", upload.single("avatar"), async (req: Request, res: Response) => {
   try {
-    const {id} = req.params
-    const user = await User.findById(id).select("-password")
+    const { id } = req.params;
+    const { firstname, lastname, username } = req.body;
 
+    const updatedData: Record<string, any> = {
+      firstname,
+      lastname,
+      username,
+    };
+
+    if (req.file) {
+      updatedData.image = `/uploads/avatars/${req.file.filename}`;
+    }
+
+    const user = await User.findByIdAndUpdate(id, updatedData, { new: true }).select("-password");
+
+    if (!user) {
+      return res.status(404).json({ error: "Пользователь не найден" });
+    }
+
+    res.json(user);
   } catch (err: unknown) {
-    return res.status(500).json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
+    return res.status(500).json({
+      error: err instanceof Error ? err.message : "Неизвестная ошибка",
+    });
   }
-})
+});
 
 
 export default router;

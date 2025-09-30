@@ -94,6 +94,9 @@ ul, ul li {
 }
 
 img {
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
 	vertical-align: top;
 }
 
@@ -157,6 +160,8 @@ address {
 .floating-input input:not(:placeholder-shown) + label,
 .floating-input textarea:focus + label,
 .floating-input textarea:not(:placeholder-shown) +label {
+  display: flex;
+  align-items: center;
   top: -16px;
   left: 16px;
   padding: 8px 16px;

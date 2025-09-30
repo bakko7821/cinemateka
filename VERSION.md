@@ -154,3 +154,16 @@
 ### Клиентская часть
 
 - Создана страница **EditProfilePage.tsx** с компонентом **EditProfileCard.tsx**
+
+# commit 11.16.2
+
+### Серверная часть
+
+- Создан файл **middleware/multer.ts**
+- Добавлен PUT роут на изменения информации о пользователи в **/routes/users.ts**
+
+### Клиентская часть
+
+- Готова страница **EditProfilePage.tsx** с компонентом **EditProfileCard.tsx**
+- Небольшие изменения **RaitingSelector.tsx**
+- Небольшие изменения **ReviewCard.tsx**

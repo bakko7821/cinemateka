@@ -166,6 +166,13 @@ export default function AddFilmCard() {
     }
   }
 
+  const textarea = document.querySelector("textarea");
+
+  textarea?.addEventListener("input", () => {
+    textarea.style.height = "auto"; 
+    textarea.style.height = textarea.scrollHeight + "px";
+  });
+
   return (
     <>
     <p className="titleText">Добавление рецезнии</p>
@@ -265,20 +272,25 @@ export default function AddFilmCard() {
             </div>
           </div>
           <div className="userReviewBox flex-column">
-            <p className="titleText">Поделитесь мнением</p>
-            <RatingSelector value={rating} onChange={setRating} />
-            <div className="reviewBox">
+            <div className="headingBox flex-between">
+              <p className="titleText">Поделитесь мнением</p>
+              <RatingSelector value={rating} onChange={setRating} />
+            </div>
+            <div className="reviewBox flex-column">
               <div className="floating-input">
                 <textarea
                   className="addFilmInput"
-                  value={reviewText} // ✅ контролируемое поле
-                  onChange={(e) => setReviewText(e.target.value)} // обновляем state
+                  value={reviewText}
+                  onChange={(e) => setReviewText(e.target.value)}
                   placeholder="Рецензия к фильму"
                 />
-                <label htmlFor="textarea">Рецензия к фильму</label>
+                <label htmlFor="textarea">
+                  <img src="../../public/images/note.svg" alt="" />
+                  Рецензия к фильму</label>
               </div>
               <button className="sendReviewButton flex-center" onClick={() => postReview()}>
                 <img src="../../public/images/send.svg" alt="Добавить" />
+                Отправить рецензию
               </button>
             </div>   
           </div>

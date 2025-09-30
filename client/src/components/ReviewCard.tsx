@@ -58,10 +58,15 @@ export default function ReviewCard() : JSX.Element {
     }, [data?.author]);
 
     return (
-        <div className="reviewPage">
+        <>
+        <div className="headingPageInfo">
             <button className="backButton" onClick={() => navigate(-1)}>
                 <img src="../../public/images/left-arrow.svg" alt="" />
             </button> 
+            <p className="titleText">Рецензия на фильм <span>{data?.review.film?.title}</span> от {data?.author.username}</p>
+        </div>
+        
+        <div className="reviewPage">
             <div className="choosedFilmInfoBox flex-column">
                 <p className="titleText">Информация о фильме:</p>
                 {data?.review.film && (
@@ -123,5 +128,6 @@ export default function ReviewCard() : JSX.Element {
                 <p className="reviewText">{data?.review.text}</p>
             </div>
         </div>
+        </>
     )
 }
