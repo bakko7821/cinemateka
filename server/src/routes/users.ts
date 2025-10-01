@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import User, { IReview } from "../modules/User";
 import Film from "../modules/Film";
-import { Types } from "mongoose";
+import mongoose, { Types } from "mongoose";
 import { upload } from "../middleware/multer";
 
 const router = express.Router();
@@ -201,6 +201,47 @@ router.put("/:id/set", upload.single("avatar"), async (req: Request, res: Respon
     return res.status(500).json({
       error: err instanceof Error ? err.message : "Неизвестная ошибка",
     });
+  }
+});
+
+router.post("/:id/favorite", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { userId } = req.body;
+
+    if (!userId) {
+      return res.status(400).json({ error: "Не передан userId" });
+    }
+
+    if (id === userId) {
+      return res.status(400).json({ error: "Нельзя подписаться на себя" });
+    }
+
+    const user = await User.findById(userId);
+    const target = await User.findById(id);
+
+    if (!user || !target) {
+      return res.status(404).json({ error: "Пользователь не найден" });
+    }
+
+    const isFollowing = user.favorites.includes(new mongoose.Types.ObjectId(id));
+
+    if (isFollowing) {
+      // отписка
+      user.favorites = user.favorites.filter(
+        favId => favId.toString() !== id
+      );
+      await user.save();
+      return res.json({ msg: "Отписка выполнена", favorites: user.favorites });
+    } else {
+      // подписка
+      user.favorites.push(new mongoose.Types.ObjectId(id));
+      await user.save();
+      return res.json({ msg: "Подписка выполнена", favorites: user.favorites });
+    }
+  } catch (err: any) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
   }
 });
 

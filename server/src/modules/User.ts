@@ -16,6 +16,7 @@ export interface IUser extends Document {
   createdAt: Date;
   image?: string;
   reviews: IReview[];
+  favorites: mongoose.Types.ObjectId[]; // список пользователей, на которых подписан
 }
 
 const reviewSchema = new Schema<IReview>({
@@ -38,6 +39,7 @@ const userSchema = new Schema<IUser>({
   createdAt: { type: Date, default: Date.now },
   image: { type: String, default: "" },
   reviews: { type: [reviewSchema], default: [] },
+  favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "User", default: [] }], // подписки
 });
 
 const User = mongoose.model<IUser>("User", userSchema);

@@ -10,6 +10,7 @@ interface User {
   username: string;
   email: string;
   image: string;
+  favorites: string[];
 }
 
 interface GenresResponse {
@@ -46,6 +47,7 @@ export default function ProfileCard() : JSX.Element {
     const [genres, setGenres] = useState<GenreStat[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
+    const [isFollowing, setIsFollowing] = useState(false);
 
     const navigate = useNavigate()
 
@@ -59,9 +61,17 @@ export default function ProfileCard() : JSX.Element {
     }, [id]);
 
     useEffect(() => {
-        const authUser = localStorage.getItem("authUser")
-        setIsAuth(authUser ? JSON.parse(authUser)?._id === id : false);
-    })
+        const authUser = localStorage.getItem("authUser");
+        if (authUser) {
+            const parsed = JSON.parse(authUser);
+            setIsAuth(parsed?._id === id);
+
+            // проверяем, подписан ли
+            if (user && parsed) {
+                setIsFollowing(user?.favorites?.includes(parsed._id) ?? false);
+            }
+        }
+    }, [user, id]);
 
     useEffect(() => {
         setUserAvatar(user?.image ? user.image : null);
@@ -103,6 +113,26 @@ export default function ProfileCard() : JSX.Element {
         fetchReviews();
     }, [id]);
 
+    async function handleFollow(targetId: string | undefined) {
+        if (!targetId) return;
+
+        const authUser = localStorage.getItem("authUser");
+        if (!authUser) return navigate("/login");
+
+        const parsed = JSON.parse(authUser);
+
+        try {
+            const res = await axios.post(`http://localhost:5000/users/${targetId}/favorite`, {
+            userId: parsed._id,
+            });
+
+            setIsFollowing(!isFollowing); // переключаем состояние
+            console.log(res.data.msg);
+        } catch (err) {
+            console.error("Ошибка при подписке:", err);
+        }
+    }
+
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>{error}</p>;
 
@@ -131,8 +161,19 @@ export default function ProfileCard() : JSX.Element {
                     </button>
                 ) : (
                     <div className="buttonsBox flex-center">
-                        <button className="followButton flex-center">
-                            <img src="../../public/images/follow.svg" alt="" />
+                        <button
+                            className={`followButton flex-center ${isFollowing ? "unfollow" : ""}`}
+                            onClick={() => handleFollow(user?._id)}
+                        >
+                            {isFollowing ? (
+                            <>
+                                <img src="../../public/images/unfollow.svg" alt="" />
+                            </>
+                            ) : (
+                            <>
+                                <img src="../../public/images/follow.svg" alt="" />
+                            </>
+                            )}
                         </button>
                         <button className="giftSubscribeButton flex-center">
                             <img src="../../public/images/gift.svg" alt="" />

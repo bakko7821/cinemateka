@@ -38,6 +38,18 @@
     filter: brightness(0) invert(1);
 }
 
+.headingBox .followButton.unfollow {
+    background-color: var(--main-color);
+}
+
+.headingBox .followButton.unfollow:hover {
+    background-color: #8f82e0;
+}
+
+.headingBox .followButton.unfollow img{
+    filter: none;
+}
+
 .headingBox button {
     background-color: var(--main-color);
     padding: 8px;
@@ -212,3 +224,4 @@
 .reviewCard .reviewAllInfo .headingBox .reviewInfo .start {
     gap: 4px;
 }
+
