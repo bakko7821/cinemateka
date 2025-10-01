@@ -269,9 +269,15 @@ body::-webkit-scrollbar-thumb {
 
 .notificationMessage {
   top: 16px;
+  right: 40vw;
   gap: 8px;
   position: absolute;
   padding: 16px;
   border-radius: 16px;
   background-color: var(--main-color);
+}
+
+.headerBox img {
+  cursor: pointer;
+  object-fit: none;
 }

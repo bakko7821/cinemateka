@@ -109,7 +109,7 @@ export default function EditProfileCard(): JSX.Element {
       </div>
       <div className="editProfilePage">
         {isAuth ? (
-          <div className="editProfileBox">
+          <div className="editProfileBox flex-center">
             <div className="userInfo flex-center">
                 <div className="editUserAvatarBox flex-column">
                     {userAvatar ? (
@@ -127,8 +127,6 @@ export default function EditProfileCard(): JSX.Element {
                         <p>{user?.username.charAt(0)}</p>
                     </div>
                     )}
-
-                    {/* Кнопка выбора файла всегда видна */}
                     <form method="post" onSubmit={(e) => e.preventDefault()}>
                     <label className="input-file">
                         <input
@@ -138,7 +136,6 @@ export default function EditProfileCard(): JSX.Element {
                         />
                         <span className="input-file-btn">
                         <img src="../../public/images/upload.svg" alt="" />
-                        Выберите файл
                         </span>
                     </label>
                     </form>
@@ -149,30 +146,33 @@ export default function EditProfileCard(): JSX.Element {
               onSubmit={(e) => e.preventDefault()}
               className="infoForm flex-column"
             >
-              <div className="floating-input">
-                <input
-                  type="text"
-                  id="firstname"
-                  name="firstname"
-                  value={firstname}
-                  onChange={(e) => setFirstname(e.target.value)}
-                  placeholder="Имя"
-                  required
-                />
-                <label htmlFor="firstname">Имя</label>
+              <div className="fullNameBox flex-center">
+                <div className="floating-input">
+                  <input
+                    type="text"
+                    id="firstname"
+                    name="firstname"
+                    value={firstname}
+                    onChange={(e) => setFirstname(e.target.value)}
+                    placeholder="Имя"
+                    required
+                  />
+                  <label htmlFor="firstname">Имя</label>
+                </div>
+                <div className="floating-input">
+                  <input
+                    type="text"
+                    id="lastname"
+                    name="lastname"
+                    value={lastname}
+                    onChange={(e) => setLastname(e.target.value)}
+                    placeholder="Фамилия"
+                    required
+                  />
+                  <label htmlFor="lastname">Фамилия</label>
+                </div>
               </div>
-              <div className="floating-input">
-                <input
-                  type="text"
-                  id="lastname"
-                  name="lastname"
-                  value={lastname}
-                  onChange={(e) => setLastname(e.target.value)}
-                  placeholder="Фамилия"
-                  required
-                />
-                <label htmlFor="lastname">Фамилия</label>
-              </div>
+              
               <div className="floating-input">
                 <input
                   type="text"

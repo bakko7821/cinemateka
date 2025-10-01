@@ -187,7 +187,7 @@ export default function ProfileCard() : JSX.Element {
                 <p className="titleText">Рецензии</p>
                 <div className="infoBox flex-column">
                 {Array.isArray(reviews) && reviews.length > 0 ? (
-                    reviews.map(review => (
+                    reviews.slice().reverse().map(review => (
                         <div className="reviewCard" key={review.filmId}>
                             {review.film?.poster && <img className="filmPoster" src={review.film.poster} alt={review.film.title} />}
                             <div className="reviewAllInfo flex-column">
@@ -198,9 +198,9 @@ export default function ProfileCard() : JSX.Element {
                                         <div className="stars flex-center">
                                             {Array.from({ length: 10 }).map((_, index) => (
                                                 <img
-                                                key={index}
-                                                src={index < review.rating ? "/images/activeStar.svg" : "/images/nonActiveStar.svg"}
-                                                alt={index < review.rating ? "Активная звезда" : "Пустая звезда"}
+                                                    key={index}
+                                                    src={index < review.rating ? "/images/activeStar.svg" : "/images/nonActiveStar.svg"}
+                                                    alt={index < review.rating ? "Активная звезда" : "Пустая звезда"}
                                                 />
                                             ))}
                                         </div>

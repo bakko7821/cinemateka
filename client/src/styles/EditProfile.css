@@ -13,7 +13,7 @@
 
 .headingPageInfo.flex-between .saveChangesButton {
     gap: 8px;
-    background-color: #009912;
+    background-color: var(--main-color);
     padding: 8px;
     border-radius: 12px;
     font-size: clamp(1rem, 2vh, 1.5rem);
@@ -22,13 +22,10 @@
 }
 
 .headingPageInfo.flex-between .saveChangesButton:hover {
-    background-color: #00660C;
+    background-color: #8f82e0;
 }
 
 .editProfilePage .editProfileBox {
-    display: flex;
-    align-items: start;
-    justify-content: start;
     gap: 16px;
     padding: 16px;
     border-radius: 28px;
@@ -79,43 +76,29 @@
 }
 
 .editProfilePage .editProfileBox .userInfo .editUserAvatarBox {
+    position: relative;
     gap: 8px;
 }
 
 .editProfilePage .editProfileBox .userInfo .userAvatar {
-    width: 180px;
-    height: 180px;
-    border-radius: 12px;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
 }
 
 .input-file {
-    width: 100%;
-	position: relative;
-	display: inline-block;
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background-color: rgba(0, 0, 0, 0.8);
+    width: fit-content;
+    height: fit-content;
+    border-radius: 100%;
+	display: flex;
 }
 
 .input-file span {
-	position: relative;
-	display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-	cursor: pointer;
-	outline: none;
-	text-decoration: none;
-	font-size: clamp(0.8rem, 2vh, 1rem);
-    font-weight: 500;
-	vertical-align: middle;
-	color: rgb(255 255 255);
-	text-align: center;
-	border-radius: 12px;
-	background-color: var(--main-color);
-	line-height: 22px;
-	padding: 8px;
-	box-sizing: border-box;
-	border: none;
-	margin: 0;
-	transition: background-color 0.5s;
+    padding: 8px;
 }
 
 .input-file input[type=file] {
@@ -127,22 +110,6 @@
 	height: 0;
 }
 
-.input-file:hover span {
-	background-color: #8f82e0;
-}
-.input-file:active span {
-	background-color: #8f82e0;
-}
-
-.userTextInfo {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 16px;
-}
-
-.userTextInfo span {
-    width: 1px;
-    height: 24px;
-    background-color: var(--text-color);
+.fullNameBox {
+    gap: 24px;
 }
