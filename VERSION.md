@@ -185,3 +185,11 @@
 
 - Изменена кнопка подписка на пользователя
 
+## commit 12.19.2
+
+- Удален **/components/HomeCard.tsx**
+- Создан **/components/HeaderHomePage.tsx**
+- Создан **/components/AdvantagesHomePage.tsx**
+- Создан **/components/RollFilmsHomePage.tsx**
+- Создан **/components/UserAuthHomePage.tsx**
+- Новые компоненты помещены в **/pages/HomePage.tsx**
