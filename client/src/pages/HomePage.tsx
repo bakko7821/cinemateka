@@ -34,11 +34,11 @@ function HomePage() {
         {isAuth ? (
             <UserAuth />
         ) : (
-            <>
+            <div className="homePage flex-column flex-center">
                 <Header />
                 <Advantages />
                 <RollFilms />
-            </>
+            </div>
         )}
         </>
     )

@@ -69,4 +69,38 @@ router.post("/parse-by-api", async (req: Request, res: Response) => {
   }
 });
 
+interface Movie {
+  id: number;
+  name: string;
+  year: number;
+  description?: string;
+  poster?: {
+    url: string;
+    previewUrl: string;
+  };
+}
+
+router.get("/get-random", async (req: Request, res: Response) => {
+  try {
+    const randomPage = Math.floor(Math.random() * 50) + 1;
+    const response = await axios.get("https://api.kinopoisk.dev/v1.4/movie", {
+      params: {
+        limit: 15,
+        page: randomPage,
+      },
+      headers: {
+        "X-API-KEY": process.env.KP_API_KEY,
+      },
+    });
+
+    const movies: Movie[] = response.data.docs;
+    res.json(movies);
+  } catch (error) {
+    console.error("Ошибка при получении фильмов:", error);
+    res.status(500).json({ message: "Ошибка при получении фильмов" });
+  }
+});
+
+
+
 export default router;

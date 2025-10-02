@@ -193,3 +193,13 @@
 - Создан **/components/RollFilmsHomePage.tsx**
 - Создан **/components/UserAuthHomePage.tsx**
 - Новые компоненты помещены в **/pages/HomePage.tsx**
+
+## commit 13.20.2
+
+### Серверная часть
+
+- Добавлен GET роут на получение 15-ти рандомных фильмов **/routes/parse.ts** (ПОКА РАБОТАЕТ НЕ СОВЕРШЕННО - БУДЕТ ПЕРЕДЕЛЫВАТЬСЯ)
+
+### Клиентская часть
+- Готов компонент **/components/HeaderHomePage.tsx**
+- Готов компонент **/components/AdvantagesHomePage.tsx**
