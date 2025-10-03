@@ -6,7 +6,7 @@ const router = express.Router();
 // Добавление нового фильма
 router.post("/", async (req: Request, res: Response) => {
   try {
-    const { title, year, poster, genres } = req.body;
+    const { title, year, poster, kpId, genres } = req.body;
 
     if (!title || !year || !poster || !genres) {
       return res.status(400).json({ error: "Не все данные переданы" });
@@ -17,7 +17,7 @@ router.post("/", async (req: Request, res: Response) => {
       return res.status(400).json({ error: "Фильм с таким названием и годом уже существует" });
     }
 
-    const newFilm: IFilm = new Film({ title, poster, year: Number(year), genres });
+    const newFilm: IFilm = new Film({ title, poster, kpId, year: Number(year), genres });
     await newFilm.save();
 
     res.status(201).json({ msg: "Фильм добавлен", film: newFilm });

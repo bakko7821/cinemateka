@@ -35,6 +35,7 @@ export default function RollFilms(): JSX.Element {
 
         const randomFilms = getRandomFilms(res.data);
         setFilms(randomFilms);
+        console.log(randomFilms)
 
         setLoading(false);
       } catch (err) {
@@ -98,6 +99,7 @@ export default function RollFilms(): JSX.Element {
 
   return (
     <div className="rollFilmsHomePageBox flex-column flex-center">
+      <p className="headingText">Выбери себе фильм на вечер</p>
       <div
         className={`filmsBox transition-transform duration-[10000ms] ease-in-out`}
         style={{
@@ -109,6 +111,7 @@ export default function RollFilms(): JSX.Element {
           <div
             className={`movieCard ${index < 5 ? positionClasses[index] : ""}`}
             key={film?._id}
+            onClick={() => window.open(`https://www.kinopoisk.ru/film/${film.kpId}`)}
           >
             <span className="backgroundBlur"></span>
             {film.poster && (

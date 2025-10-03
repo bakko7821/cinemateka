@@ -4,6 +4,7 @@ export interface IFilm extends Document {
   title: string;
   year: number;
   poster: string;
+  kpId: string;
   genres: string[];
 }
 
@@ -11,6 +12,7 @@ const FilmSchema = new Schema<IFilm>({
   title: { type: String, required: true },
   year: { type: Number, required: true },
   poster: { type: String, required: true },
+  kpId: { type: String, required: true },
   genres: { type: [String], required: true },
 });
 

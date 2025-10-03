@@ -76,6 +76,7 @@ export default function AddFilmCard() {
         title: res.data.title,
         year: res.data.year ?? "",
         poster: res.data.poster ?? "",
+        kpId: res.data.kpId ?? "",
         genres: res.data.genres ?? [],
       });
 
