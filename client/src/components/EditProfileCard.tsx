@@ -111,11 +111,12 @@ export default function EditProfileCard(): JSX.Element {
       <div className="editProfilePage">
         {isAuth ? (
           <>
-            <div className="editProfileBox flex-center">
-              <div className="titleText">
-                <img src="" alt="" />
-                <p>Информация о себе</p>
-              </div>
+          <div className="editProfileBox flex-column">
+            <div className="titleText">
+              <img src="../../public/images/smile.svg" alt="" />
+              <p>Информация о себе</p>
+            </div>
+            <div className="editUserBox flex-center">
               <div className="userInfo flex-center">
                 <div className="editUserAvatarBox flex-column">
                     {userAvatar ? (
@@ -151,46 +152,47 @@ export default function EditProfileCard(): JSX.Element {
                 onSubmit={(e) => e.preventDefault()}
                 className="infoForm flex-column"
               >
-              <div className="fullNameBox flex-center">
+                <div className="fullNameBox flex-center">
+                  <div className="floating-input">
+                    <input
+                      type="text"
+                      id="firstname"
+                      name="firstname"
+                      value={firstname}
+                      onChange={(e) => setFirstname(e.target.value)}
+                      placeholder="Имя"
+                      required
+                    />
+                    <label htmlFor="firstname">Имя</label>
+                  </div>
+                  <div className="floating-input">
+                    <input
+                      type="text"
+                      id="lastname"
+                      name="lastname"
+                      value={lastname}
+                      onChange={(e) => setLastname(e.target.value)}
+                      placeholder="Фамилия"
+                      required
+                    />
+                    <label htmlFor="lastname">Фамилия</label>
+                  </div>
+                </div>
+                
                 <div className="floating-input">
                   <input
                     type="text"
-                    id="firstname"
-                    name="firstname"
-                    value={firstname}
-                    onChange={(e) => setFirstname(e.target.value)}
-                    placeholder="Имя"
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Имя пользователя"
                     required
                   />
-                  <label htmlFor="firstname">Имя</label>
+                  <label htmlFor="username">Имя пользователя</label>
                 </div>
-                <div className="floating-input">
-                  <input
-                    type="text"
-                    id="lastname"
-                    name="lastname"
-                    value={lastname}
-                    onChange={(e) => setLastname(e.target.value)}
-                    placeholder="Фамилия"
-                    required
-                  />
-                  <label htmlFor="lastname">Фамилия</label>
-                </div>
-              </div>
-              
-              <div className="floating-input">
-                <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  placeholder="Имя пользователя"
-                  required
-                />
-                <label htmlFor="username">Имя пользователя</label>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
           <ChangeTheme />
           </>

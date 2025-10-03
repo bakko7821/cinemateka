@@ -117,3 +117,104 @@
 .changeThemeBox {
     flex: 1;
 }
+
+.editUserBox {
+    gap: 16px;
+}
+
+.editProfilePage .titleText {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+    padding: 0;
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.changeThemeBox {
+    gap: 16px;
+    padding: 16px;
+}
+
+.changeThemeBox .changeThemeInfo {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    gap: 16px;
+    border-radius: 12px;
+}
+
+.changeThemeBox .changeThemeInfo .nonSubcscribeBox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.changeThemeBox .changeThemeInfo .nonSubcscribeBox .nonSubcscribeText {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.changeThemeBox .changeThemeInfo .nonSubcscribeBox .goToSubscribePageButton {
+    font-size: 1.5rem;
+    color: var(--text-color);
+    padding: 8px 16px;
+    font-weight: 500;
+    line-height: 1.4;
+    background-color: var(--main-color);
+    border-radius: 12px;
+    transition: background-color 0.5s;
+}
+
+.changeThemeBox .changeThemeInfo .nonSubcscribeBox .goToSubscribePageButton:hover {
+    background-color: #8f82e0;
+}
+
+.changeThemeBox .changeThemeInfo .titleText {
+    line-height: 1.5;
+    color: var(--secondary-text-color);
+    font-weight: 400;
+    font-size: 1rem;
+}
+
+.changeThemeBox .changeThemeInfo .peakThemeColorBox,
+.changeThemeBox .changeThemeInfo .peakMainColorBox {
+    gap: 8px;
+}
+
+
+.changeThemeBox .changeThemeInfo .colorsBox,
+.changeThemeBox .peakThemeColorBox .themeBox {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 8px;
+}
+
+.changeThemeBox .changeThemeInfo .colorsBox .color {
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+}
+
+.changeThemeBox .peakThemeColorBox .themeBox .theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    gap: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+}
