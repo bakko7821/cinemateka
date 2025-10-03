@@ -27,7 +27,6 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
-// Получение всех фильмов (например, для проверки дубликатов)
 router.get("/", async (req: Request, res: Response) => {
   try {
     const search = req.query.search as string | undefined;
@@ -35,7 +34,7 @@ router.get("/", async (req: Request, res: Response) => {
     let films;
     if (search) {
       films = await Film.find({
-        title: { $regex: "^" + search, $options: "i" } // ищем с начала строки, регистр не важен
+        title: { $regex: "^" + search, $options: "i" }
       });
     } else {
       films = await Film.find();

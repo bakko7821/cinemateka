@@ -203,3 +203,12 @@
 ### Клиентская часть
 - Готов компонент **/components/HeaderHomePage.tsx**
 - Готов компонент **/components/AdvantagesHomePage.tsx**
+
+## commit 14.21.2
+
+### Серверная часть
+
+- Убран GET роут на получение 15-ти рандомных фильмов **/routes/parse.ts** (Функционал был изменен и перенесен на клиент)
+
+### Клиентская часть
+- Готов компонент **/components/RollFilmsHomePage.tsx**
