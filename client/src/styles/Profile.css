@@ -225,3 +225,58 @@
     gap: 4px;
 }
 
+.favoritesBox {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 32px;
+    width: 100%;
+}
+
+.favoritesBox .favoritesLeftBox {
+    gap: 32px;
+    flex: 1;
+}
+
+.favoriteUsersBox {
+    padding: 16px;
+    gap: 16px;
+    background-color: var(--background-card-color);
+    border-radius: 28px;
+}
+
+.favoriteUsersBox .titleText {
+    padding-left: 8px;
+}
+
+.favoriteUsersBox .usersCardsBox {
+    width: 100%;
+    gap: 8px;
+}
+
+.favoriteUsersBox .usersCardsBox .userCard {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+    cursor: pointer;
+    padding: 8px;
+    gap: 8px;
+    border-radius: 12px;
+    transition: background-color 0.5s;
+}
+
+.favoriteUsersBox .usersCardsBox .userCard .userAvatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+}
+
+.favoriteUsersBox .usersCardsBox .userCard .textBox .fullNameUser{
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.favoriteUsersBox .usersCardsBox .userCard:hover {
+    background-color: #31333e;
+}

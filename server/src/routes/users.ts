@@ -227,21 +227,44 @@ router.post("/:id/favorite", async (req: Request, res: Response) => {
     const isFollowing = user.favorites.includes(new mongoose.Types.ObjectId(id));
 
     if (isFollowing) {
-      // отписка
       user.favorites = user.favorites.filter(
         favId => favId.toString() !== id
       );
       await user.save();
       return res.json({ msg: "Отписка выполнена", favorites: user.favorites });
     } else {
-      // подписка
       user.favorites.push(new mongoose.Types.ObjectId(id));
       await user.save();
       return res.json({ msg: "Подписка выполнена", favorites: user.favorites });
     }
-  } catch (err: any) {
-    console.error(err);
-    return res.status(500).json({ error: err.message });
+
+  } catch (err: unknown) {
+    return res.status(500).json({
+      error: err instanceof Error ? err.message : "Неизвестная ошибка",
+    });
+  }
+});
+
+router.get("/:id/favorite", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const user = await User.findById(id).lean();
+    if (!user) {
+      return res.status(404).json({ error: "Пользователь не найден" });
+    }
+
+    const favoriteIds: string[] = (user.favorites || []).map(id => id.toString());
+
+    const favoriteUsers = await User.find({ _id: { $in: favoriteIds } })
+    .select("_id firstname lastname username image")
+    .lean();
+
+    return res.json(favoriteUsers);
+  } catch (err: unknown) {
+    return res.status(500).json({
+      error: err instanceof Error ? err.message : "Неизвестная ошибка",
+    });
   }
 });
 

@@ -38,6 +38,14 @@ interface Reviews {
     film: Film;
 }
 
+interface IUser {
+  _id: string;
+  firstname: string;
+  lastname: string;
+  username: string;
+  image?: string;
+}
+
 export default function ProfileCard() : JSX.Element {
     const { id } = useParams<{ id: string }>();
     const [user, setUser] = useState<User | null>(null);
@@ -46,6 +54,7 @@ export default function ProfileCard() : JSX.Element {
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
     const [genres, setGenres] = useState<GenreStat[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);
     const [loading, setLoading] = useState(true);
     const [isFollowing, setIsFollowing] = useState(false);
 
@@ -133,6 +142,28 @@ export default function ProfileCard() : JSX.Element {
         }
     }
 
+    useEffect(() => {
+        const fetchFavoriteUsers = async () => {
+            setLoading(true);
+            setError(null);
+
+            try {
+                const response = await fetch(`http://localhost:5000/users/${id}/favorite`);
+                if (!response.ok) {
+                throw new Error("Ошибка при получении данных");
+                }
+                const data: IUser[] = await response.json();
+                setFavoriteUsers(data);
+            } catch (err: unknown) {
+                setError(err instanceof Error ? err.message : "Неизвестная ошибка");
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchFavoriteUsers()
+    }, [id]) 
+
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>{error}</p>;
 
@@ -182,48 +213,80 @@ export default function ProfileCard() : JSX.Element {
                     </div>
                 )}
             </div>
-            <div className="favoriteGenre flex-column">
-                <p className="titleText">Любимые жанры</p>
-                <div className="infoBox">
-                {Array.isArray(genres) && genres.length > 0 ? (
-                    genres.map((g, idx) => (
-                        <div className="genreCard flex-center" key={idx}>
-                        <p className="genreName">{g.genre}</p>
-                        <span></span>
-                        <p className="genreCount">{g.count}</p>
+            <div className="favoritesBox">
+                <div className="favoritesLeftBox flex-column">
+                    <div className="favoriteGenre flex-column">
+                        <p className="titleText">Любимые жанры</p>
+                        <div className="infoBox">
+                        {Array.isArray(genres) && genres.length > 0 ? (
+                            genres.map((g, idx) => (
+                                <div className="genreCard flex-center" key={idx}>
+                                <p className="genreName">{g.genre}</p>
+                                <span></span>
+                                <p className="genreCount">{g.count}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p className="nullMessage">У пользователя нет любимых жанров</p>
+                        )}
                         </div>
-                    ))
-                ) : (
-                    <p className="nullMessage">У пользователя нет любимых жанров</p>
-                )}
-                </div>
-            </div>
-            <div className="favoriteFilms flex-column">
-                <p className="titleText">Любимые фильмы</p>
-                <div className="infoBox">
-                    {Array.isArray(reviews) && reviews.length > 0 ? (
-                    reviews
-                        .slice() // чтобы не мутировать исходный массив
-                        .sort((a, b) => b.rating - a.rating) // сортировка по убыванию
-                        .map(review => (
-                        <div className="filmCard flex-column" onClick={() => navigate(`/review/${review._id}`)} key={review._id}>
-                            {review.film?.poster && (
-                            <img
-                                className="filmPoster"
-                                src={review.film.poster}
-                                alt={review.film.title}
-                            />
+                    </div>
+                    <div className="favoriteFilms flex-column">
+                        <p className="titleText">Любимые фильмы</p>
+                        <div className="infoBox">
+                            {Array.isArray(reviews) && reviews.length > 0 ? (
+                            reviews
+                                .slice() // чтобы не мутировать исходный массив
+                                .sort((a, b) => b.rating - a.rating) // сортировка по убыванию
+                                .map(review => (
+                                <div className="filmCard flex-column" onClick={() => navigate(`/review/${review._id}`)} key={review._id}>
+                                    {review.film?.poster && (
+                                    <img
+                                        className="filmPoster"
+                                        src={review.film.poster}
+                                        alt={review.film.title}
+                                    />
+                                    )}
+                                    <div className="filmRaiting flex-center">
+                                    <p>{review.rating}/10</p>
+                                    </div>
+                                </div>
+                                ))
+                            ) : (
+                            <p className="nullMessage">У пользователя нет рецензий</p>
                             )}
-                            <div className="filmRaiting flex-center">
-                            <p>{review.rating}/10</p>
-                            </div>
                         </div>
-                        ))
-                    ) : (
-                    <p className="nullMessage">У пользователя нет рецензий</p>
-                    )}
+                    </div>
+                </div>
+                <div className="favoriteUsersBox flex-column">
+                    <p className="titleText">Подписки</p>  
+                    <div className="usersCardsBox flex-column">
+                            {Array.isArray(favoriteUsers) && favoriteUsers.length > 0 ? (
+                                favoriteUsers.map(favoriteUser => (
+                                    <div className="userCard" key={favoriteUser._id}
+                                    onClick={() => navigate(`/profile/${favoriteUser._id}`)}>
+                                       {favoriteUser.image ? (
+                                            <img className="userAvatar"
+                                                src={`http://localhost:5000${favoriteUser.image}`}
+                                                alt="avatar" />
+                                        ) : (
+                                            <div className="userAvatar flex-center">
+                                                <p>{favoriteUser.username.charAt(0)}</p>
+                                            </div>
+                                        )}
+                                        <div className="textBox flex-column">
+                                            <p className="fullNameUser">{favoriteUser.firstname} {favoriteUser.lastname}</p>
+                                            <p className="userName">@{favoriteUser.username}</p>
+                                        </div> 
+                                    </div>
+                                ))
+                            ) : (
+                               <p className="nullMessage">Пользователь никого не отслеживает</p> 
+                            )}
+                    </div> 
                 </div>
             </div>
+            
             <div className="userReviews flex-column">
                 <p className="titleText">Рецензии</p>
                 <div className="infoBox flex-column">

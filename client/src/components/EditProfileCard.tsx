@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import ChangeTheme from "./ChangeTheme";
 
 interface User {
   _id: string;
@@ -109,8 +110,13 @@ export default function EditProfileCard(): JSX.Element {
       </div>
       <div className="editProfilePage">
         {isAuth ? (
-          <div className="editProfileBox flex-center">
-            <div className="userInfo flex-center">
+          <>
+            <div className="editProfileBox flex-center">
+              <div className="titleText">
+                <img src="" alt="" />
+                <p>Информация о себе</p>
+              </div>
+              <div className="userInfo flex-center">
                 <div className="editUserAvatarBox flex-column">
                     {userAvatar ? (
                     <img
@@ -140,12 +146,11 @@ export default function EditProfileCard(): JSX.Element {
                     </label>
                     </form>
                 </div>
-                </div>
-
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="infoForm flex-column"
-            >
+              </div>
+              <form
+                onSubmit={(e) => e.preventDefault()}
+                className="infoForm flex-column"
+              >
               <div className="fullNameBox flex-center">
                 <div className="floating-input">
                   <input
@@ -187,6 +192,8 @@ export default function EditProfileCard(): JSX.Element {
               </div>
             </form>
           </div>
+          <ChangeTheme />
+          </>
         ) : (
           <p>Вы не можете редактировать чужой профиль</p>
         )}

@@ -127,7 +127,7 @@ export default function RollFilms(): JSX.Element {
       <div className="buttonsBox flex-center">
         <button className="rollButton flex-center" onClick={handleRotate}>
           <img src="../../../public/images/dice.svg" alt="" />
-          Вращать колесо
+          Выбрать фильм
         </button>
         <button className="goToRollPageButton flex-center" onClick={() => navigate("/roll")}>
           <img src="../../../public/images/note2.svg" alt="" />

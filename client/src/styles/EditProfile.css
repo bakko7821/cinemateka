@@ -3,7 +3,9 @@
     align-items: start;
     justify-content: start;
     width: 100%;
-    gap: 16px;
+    gap: 32px;
+    border-radius: 28px;
+    background-color: var(--background-card-color);
 }
 
 .headingPageInfo.flex-between {
@@ -26,11 +28,9 @@
 }
 
 .editProfilePage .editProfileBox {
+    flex: 1;
     gap: 16px;
     padding: 16px;
-    border-radius: 28px;
-    width: 100%;
-    background-color: var(--background-card-color);
 }
 
 .editProfilePage .editProfileBox .infoForm {
@@ -88,8 +88,8 @@
 
 .input-file {
     position: absolute;
-    top: 40px;
-    left: 40px;
+    top: 45px;
+    left: 45px;
     background-color: rgba(0, 0, 0, 0.8);
     width: fit-content;
     height: fit-content;
@@ -112,4 +112,8 @@
 
 .fullNameBox {
     gap: 24px;
+}
+
+.changeThemeBox {
+    flex: 1;
 }
