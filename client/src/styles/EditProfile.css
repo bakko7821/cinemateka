@@ -24,7 +24,7 @@
 }
 
 .headingPageInfo.flex-between .saveChangesButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
 }
 
 .editProfilePage .editProfileBox {
@@ -52,7 +52,7 @@
 }
 
 .backButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
     transition: background-color 0.5s;
 }
 
@@ -176,7 +176,7 @@
 }
 
 .changeThemeBox .changeThemeInfo .nonSubcscribeBox .goToSubscribePageButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
 }
 
 .changeThemeBox .changeThemeInfo .titleText {

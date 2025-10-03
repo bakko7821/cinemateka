@@ -39,7 +39,7 @@
 }
 
 .backButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
     transition: background-color 0.5s;
 }
 

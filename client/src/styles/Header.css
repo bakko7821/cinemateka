@@ -23,7 +23,7 @@
 }
 
 .signInBox button.registerButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
     transition: background-color 0.5s;
 }
 
@@ -102,6 +102,6 @@
 }
 
 .navMenuBox .subscribe.link:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
     transition: background-color 0.5s;
 }

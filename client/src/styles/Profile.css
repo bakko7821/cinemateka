@@ -29,7 +29,7 @@
 }
 
 .headingBox .followButton:hover {
-    background-color: #6C5CD6;
+    background-color: var(--main-color);
     transition: background-color 0.5s;
 }
 
@@ -43,7 +43,7 @@
 }
 
 .headingBox .followButton.unfollow:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
 }
 
 .headingBox .followButton.unfollow img{
@@ -61,7 +61,7 @@
 }
 
 .headingBox button:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
     transition: background-color 0.5s;
 }
 

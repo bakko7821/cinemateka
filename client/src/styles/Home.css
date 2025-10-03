@@ -63,7 +63,7 @@
 }
 
 .headerHomePageBox .useAuthButton:hover {
-    background-color: #8f82e0;
+    background-color: var(--main-hover-color);
 }
 
 .advantagesHomePageBox .cardBox {
@@ -181,8 +181,8 @@
 }
 
 .rollFilmsHomePageBox .buttonsBox .rollButton:hover {
-    background-color: #8f82e0;
-    border: 2px #8f82e0 solid;
+    background-color: var(--main-hover-color);
+    border: 2px var(--main-hover-color) solid;
 }
 
 .rollFilmsHomePageBox .buttonsBox .goToRollPageButton {
@@ -192,7 +192,7 @@
 
 .rollFilmsHomePageBox .buttonsBox .goToRollPageButton:hover {
     background-color: var(--main-color);
-    color: #fff;
+    color: var(--text-color);
 }
 
 .rollFilmsHomePageBox .buttonsBox .goToRollPageButton img {
