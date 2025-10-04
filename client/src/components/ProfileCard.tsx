@@ -2,6 +2,7 @@ import { useState, useEffect, type JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/Profile.css'
+import { EditIcon, FollowIcon, GiftIcon, UnFollowIcon } from "../icons/Icons";
 
 interface User {
   _id: string;
@@ -187,7 +188,7 @@ export default function ProfileCard() : JSX.Element {
                 </div>
                 {isAuth ? (
                     <button onClick={() => navigate(`/profile/${user?._id}/edit`)} className="editProfileButton flex-center">
-                        <img src="../../public/images/edit.svg" alt="" />
+                        <EditIcon />
                         Изменить профиль
                     </button>
                 ) : (
@@ -198,16 +199,16 @@ export default function ProfileCard() : JSX.Element {
                         >
                             {isFollowing ? (
                             <>
-                                <img src="../../public/images/unfollow.svg" alt="" />
+                                <UnFollowIcon />
                             </>
                             ) : (
                             <>
-                                <img src="../../public/images/follow.svg" alt="" />
+                                <FollowIcon />
                             </>
                             )}
                         </button>
                         <button className="giftSubscribeButton flex-center">
-                            <img src="../../public/images/gift.svg" alt="" />
+                            <GiftIcon />
                             Подарить подписку
                         </button>
                     </div>
@@ -310,8 +311,7 @@ export default function ProfileCard() : JSX.Element {
                                         </div>
                                     </div>
                                     <button className="goToReviewButton flex-center" onClick={() => navigate(`/review/${review._id}`)}>
-                                        Читать подробно
-                                        <img src="../../public/images/right-arrow.svg" alt="" />
+                                        Читать подробно...
                                     </button>
                                 </div>
                                 <p className="reviewText">{review.text}</p>

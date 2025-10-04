@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import '../styles/Header.css'
 import { useNavigate } from "react-router-dom";
+import { BrushIcon, CrownIcon, ErrorIcon, LogOutIcon, ShareIcon, SuccessIcon, UserIcon, UsersIcon } from "../icons/Icons";
 
 interface NavMenuProps {
   onClose: () => void;
@@ -30,21 +31,21 @@ export default function NavMenu({ onClose }: NavMenuProps) {
         <>
         <div ref={menuRef} className="navMenuBox flex-column">
             <div className="subscribe link" onClick={() => navigate("/subscribe")}>
-                <img src="../../public/images/cron.svg" alt="" />
+                <CrownIcon />
                 <p>Subscribe</p>
-                <img src="../../public/images/cron.svg" alt="" />
+                <CrownIcon />
             </div>
             <nav className="flex-column">
                 <div className="addFilm link" onClick={() => navigate("/add")}>
-                    <img src="../../public/images/add.svg" alt="" />
+                    <BrushIcon />
                     <p>Add Film</p>
                 </div>
                 <div className="profile link" onClick={() => authUser && navigate(`/profile/${JSON.parse(authUser)._id}`)}>
-                    <img src="../../public/images/profile2.svg" alt="" />
+                    <UserIcon />
                     <p>Profile</p>
                 </div>
                 <div className="favorites link" onClick={() => navigate("/favorites")}>
-                    <img src="../../public/images/two-people.svg" alt="" />
+                    <UsersIcon />
                     <p>Favorite Users</p>
                 </div>
                 <div className="shareProfile link" onClick={() => {
@@ -59,24 +60,24 @@ export default function NavMenu({ onClose }: NavMenuProps) {
                             setError("Не удалось скопировать ссылку!") 
                         });
                 }}>
-                    <img src="../../public/images/share.svg" alt="" />
+                    <ShareIcon />
                     <p>Share Profile</p>
                 </div>
                 <div className="logOut link" onClick={() => {
                     localStorage.removeItem("token");
                     window.location.reload();
                 }}>
-                    <img src="../../public/images/log-out.svg" alt="" />
+                    <LogOutIcon />
                     <p>Log Out</p>
                 </div>
             </nav>
         </div>
         {error && <div className="notificationMessage error flex-center">
-              <img src="../../public/images/error.svg" alt="" />
+              <ErrorIcon />
               <p>{error}</p>
           </div>}
           {message && <div className="notificationMessage message flex-center">
-              <img src="../../public/images/successful.svg" alt="" />
+              <SuccessIcon />
               <p>{message}</p>
           </div>}
         </>

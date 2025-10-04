@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ChangeTheme from "./ChangeTheme";
+import { DoneIcon, EmojiNormalIcon, LeftArrowIcon, UploadIcon } from "../icons/Icons";
 
 interface User {
   _id: string;
@@ -99,12 +100,12 @@ export default function EditProfileCard(): JSX.Element {
       <div className="headingPageInfo flex-between">
         <div className="leftBox flex-center">
           <button className="backButton" onClick={() => navigate(-1)}>
-            <img src="../../public/images/left-arrow.svg" alt="" />
+            <LeftArrowIcon />
           </button>
           <p className="titleText">Изменение профиля {user?.username}</p>
         </div>
         <button onClick={handleSave} className="saveChangesButton flex-center">
-          <img src="../../public/images/done.svg" alt="" />
+          <DoneIcon />
           Сохранить изменения
         </button>
       </div>
@@ -113,7 +114,7 @@ export default function EditProfileCard(): JSX.Element {
           <>
           <div className="editProfileBox flex-column">
             <div className="titleText">
-              <img src="../../public/images/smile.svg" alt="" />
+              <EmojiNormalIcon />
               <p>Информация о себе</p>
             </div>
             <div className="editUserBox flex-center">
@@ -142,7 +143,7 @@ export default function EditProfileCard(): JSX.Element {
                         onChange={handleFileChange}
                         />
                         <span className="input-file-btn">
-                        <img src="../../public/images/upload.svg" alt="" />
+                        <UploadIcon />
                         </span>
                     </label>
                     </form>

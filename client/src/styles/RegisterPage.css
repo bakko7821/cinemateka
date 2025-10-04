@@ -27,14 +27,14 @@
     border-radius: 16px;
     font-size: clamp(1rem, 2vh, 1.5rem);
     font-weight: 500;
-    color: var(--alternative-text-color);
-    background-color: var(--text-color);
+    color: var(--text-color);
+    background-color: var(--background-color);
     transition: background-color 0.3s;
 }
 
 .registerBox .useAuthButton:hover, .loginBox .useAuthButton:hover {
     transition: background-color 0.3s;
-    background-color: var(--text-color);
+    background-color: var(--button-hover-color);
 }
 
 .orBox {
@@ -61,8 +61,8 @@
 }
 
 form button {
+    color: var(--button-text-color);
     text-transform: uppercase;
-    color: var(--secondary-text-color);
     font-weight: 500;
     font-size: clamp(1rem, 2vh, 1.5rem);
     width: 100%;

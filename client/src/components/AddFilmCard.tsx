@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect } from "react";
 import { jwtDecode} from "jwt-decode";
 import RatingSelector from "./RatingSelector";
+import { AddIcon, ErrorIcon, LinkIcon, NoteIcon, SearchIcon, SendIcon, SuccessIcon } from "../icons/Icons";
 
 interface FilmData {
   _id: string;
@@ -203,11 +204,11 @@ export default function AddFilmCard() {
           </div>
 
           {error && <div className="notificationMessage error flex-center">
-              <img src="../../public/images/error.svg" alt="" />
+              <ErrorIcon />
               <p>{error}</p>
           </div>}
           {message && <div className="notificationMessage message flex-center">
-              <img src="../../public/images/successful.svg" alt="" />
+              <SuccessIcon />
               <p>{message}</p>
           </div>}
 
@@ -227,7 +228,7 @@ export default function AddFilmCard() {
                   required
                 />
                 <label htmlFor="search">
-                  <img src="../../public/images/search2.svg" alt="" />
+                  <SearchIcon />
                   Поиск фильма по названию
                 </label>
               </div>
@@ -262,12 +263,12 @@ export default function AddFilmCard() {
                     placeholder="Вставьте ссылку на Кинопоиск"
                   />
                   <label htmlFor="addFilm">
-                    <img src="../../public/images/link.svg" alt="" />
+                    <LinkIcon />
                     Вставьте ссылку на Кинопоиск
                   </label>
                 </div>
-                <button onClick={handleParseAndAdd}>
-                  <img src="../../public/images/add2.svg" alt="Добавить" />
+                <button onClick={handleParseAndAdd} className="flex-center">
+                  <AddIcon />
                 </button>
               </div>
             </div>
@@ -285,12 +286,12 @@ export default function AddFilmCard() {
                   onChange={(e) => setReviewText(e.target.value)}
                   placeholder="Рецензия к фильму"
                 />
-                <label htmlFor="textarea">
-                  <img src="../../public/images/note.svg" alt="" />
+                <label htmlFor="textarea" className="flex-center">
+                  <NoteIcon />
                   Рецензия к фильму</label>
               </div>
               <button className="sendReviewButton flex-center" onClick={() => postReview()}>
-                <img src="../../public/images/send.svg" alt="Добавить" />
+                <SendIcon />
                 Отправить рецензию
               </button>
             </div>   

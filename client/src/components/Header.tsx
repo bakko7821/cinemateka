@@ -3,6 +3,7 @@ import { jwtDecode } from "jwt-decode"; // исправил импорт
 import "../styles/Header.css";
 import { useNavigate } from "react-router-dom";
 import NavMenu from "./NavMenu";
+import { EmojiHappyIcon, SearchIcon } from "../icons/Icons";
 
 interface JwtPayload {
   id: string;
@@ -36,14 +37,14 @@ function Header() {
       {isAuth ? (
         <div className="userNavBox flex-center">
           <div className="searchBox flex-center">
-            <img src="/images/search.svg" alt="search" />
+            <SearchIcon />
             <input type="text" placeholder="Поиск" />
           </div>
           <button
             className={`userProfileButton flex-center ${menuOpen ? "active" : ""}`}
             onClick={() => setMenuOpen(prev => !prev)}
           >
-            <img src="/images/profile.svg" alt="profile" />
+            <EmojiHappyIcon />
           </button>
           {menuOpen && <NavMenu onClose={() => setMenuOpen(false)} />}
         </div>

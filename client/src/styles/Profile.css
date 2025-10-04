@@ -19,6 +19,7 @@
 }
 
 .headingBox .followButton {
+    color: var(--button-text-color);
     background-color: transparent;
     border: 1px var(--main-color) solid;
     transition: background-color 0.5s;
@@ -51,6 +52,7 @@
 }
 
 .headingBox button {
+    color: var(--button-text-color);
     background-color: var(--main-color);
     padding: 8px;
     gap: 8px;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useNavigate } from "react-router-dom";
+import { Brush2Icon, Note2Icon } from "../../icons/Icons";
 
 interface FilmData {
   _id: string;
@@ -126,11 +127,11 @@ export default function RollFilms(): JSX.Element {
       </div>
       <div className="buttonsBox flex-center">
         <button className="rollButton flex-center" onClick={handleRotate}>
-          <img src="../../../public/images/dice.svg" alt="" />
+          <Brush2Icon />
           Выбрать фильм
         </button>
         <button className="goToRollPageButton flex-center" onClick={() => navigate("/roll")}>
-          <img src="../../../public/images/note2.svg" alt="" />
+          <Note2Icon />
           Составить свою подборку
         </button>
       </div>

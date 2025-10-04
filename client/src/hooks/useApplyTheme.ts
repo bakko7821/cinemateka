@@ -9,6 +9,7 @@ export function useApplyTheme() {
       const color = JSON.parse(savedMainColors);
       document.documentElement.style.setProperty("--main-color", color.mainColor);
       document.documentElement.style.setProperty("--main-hover-color", color.mainHoverColor);
+      document.documentElement.style.setProperty("--button-text-color", color.buttonTextColor);
     }
 
     if (savedThemeColors) {

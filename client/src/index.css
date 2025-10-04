@@ -38,11 +38,12 @@
 :root {
   --background-color: #1B1E23;
   --background-card-color: #242632;
-  --text-color: #f2f2f2;
+  --text-color: #ffffff;
   --secondary-text-color: #818181;
   --alternative-text-color: #000000;
   --main-color: #6C5CD6;
   --main-hover-color: #7d6fdb;
+  --button-text-color: #ffffff;
 }
 
 #root {
@@ -102,8 +103,21 @@ img {
 }
 
 img, svg {
-	max-width: 100%;
+  width: 24px;
+  height: 24px;
 	height: auto;
+}
+
+svg.colorSvg {
+  color: var(--main-color);
+}
+
+svg.buttonSvg {
+  color: var(--button-text-color);
+}
+
+svg.acentSvg {
+  color: var(--text-color);
 }
 
 address {

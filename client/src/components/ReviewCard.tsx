@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { LeftArrowIcon } from "../icons/Icons";
 
 interface ReviewResponse {
   review: Review;
@@ -61,7 +62,7 @@ export default function ReviewCard() : JSX.Element {
         <>
         <div className="headingPageInfo">
             <button className="backButton" onClick={() => navigate(-1)}>
-                <img src="../../public/images/left-arrow.svg" alt="" />
+                <LeftArrowIcon />
             </button> 
             <p className="titleText">Рецензия на фильм <span>{data?.review.film?.title}</span> от {data?.author.username}</p>
         </div>

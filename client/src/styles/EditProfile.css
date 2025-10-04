@@ -16,6 +16,7 @@
 .headingPageInfo.flex-between .saveChangesButton {
     gap: 8px;
     background-color: var(--main-color);
+    color: var(--button-text-color);
     padding: 8px;
     border-radius: 12px;
     font-size: clamp(1rem, 2vh, 1.5rem);
@@ -43,6 +44,7 @@
     justify-content: center;
     padding: 8px;
     background-color: var(--main-color);
+    color: var(--button-text-color);
     border-radius: 28px;
     transition: background-color 0.5s;
 }
@@ -166,7 +168,7 @@
 
 .changeThemeBox .changeThemeInfo .nonSubcscribeBox .goToSubscribePageButton {
     font-size: 1.5rem;
-    color: var(--text-color);
+    color: var(--button-text-color);
     padding: 8px 16px;
     font-weight: 500;
     line-height: 1.4;

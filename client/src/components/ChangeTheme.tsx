@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SettingsIcon } from "../icons/Icons";
 
 interface Colors {
   mainColor: string;
   mainHoverColor: string;
+  buttonTextColor: string;
 }
 
 interface ThemeColors {
@@ -17,14 +19,14 @@ export default function ChangeTheme() {
     const navigate = useNavigate()
 
     const colors = [
-        {id: "d65c5e", colors:{mainColor: "#D65C5E", mainHoverColor: "#db6f71" } , name: "red"},
-        {id: "d6955c", colors:{mainColor: "#d6955c", mainHoverColor: "#dba16f" }, name: "orange"},
-        {id: "d6d25c", colors:{mainColor: "#d6d25c", mainHoverColor: "#dbd76f" }, name: "yellow"},
-        {id: "5cd66a", colors:{mainColor: "#5cd66a", mainHoverColor: "#6fdb7c" }, name: "green"},
-        {id: "5cbcd6", colors:{mainColor: "#5cbcd6", mainHoverColor: "#6fc4db" }, name: "sky"},
-        {id: "4b3bda", colors:{mainColor: "#4b3bda", mainHoverColor: "#6052de" }, name: "blue"},
-        {id: "6c5cd6", colors:{mainColor: "#6c5cd6", mainHoverColor: "#7d6fdb" }, name: "purple"},
-        {id: "d65cc6", colors:{mainColor: "#d65cc6", mainHoverColor: "#db6fcd" }, name: "pink"},
+        {id: "d65c5e", colors:{mainColor: "#D65C5E", mainHoverColor: "#db6f71", buttonTextColor: "#ffffff" } , name: "red"},
+        {id: "d6955c", colors:{mainColor: "#d6955c", mainHoverColor: "#dba16f", buttonTextColor: "#000000" }, name: "orange"},
+        {id: "d6d25c", colors:{mainColor: "#d6d25c", mainHoverColor: "#dbd76f", buttonTextColor: "#000000" }, name: "yellow"},
+        {id: "5cd66a", colors:{mainColor: "#5cd66a", mainHoverColor: "#82e08d", buttonTextColor: "#000000"  }, name: "green"},
+        {id: "5cbcd6", colors:{mainColor: "#5cbcd6", mainHoverColor: "#6fc4db", buttonTextColor: "#000000"  }, name: "sky"},
+        {id: "4b3bda", colors:{mainColor: "#4b3bda", mainHoverColor: "#6052de", buttonTextColor: "#ffffff"  }, name: "blue"},
+        {id: "6c5cd6", colors:{mainColor: "#6c5cd6", mainHoverColor: "#7d6fdb", buttonTextColor: "#ffffff"  }, name: "purple"},
+        {id: "d65cc6", colors:{mainColor: "#d65cc6", mainHoverColor: "#db6fcd", buttonTextColor: "#ffffff"  }, name: "pink"},
     ];
 
     const themes = [
@@ -37,7 +39,7 @@ export default function ChangeTheme() {
         },
         {
             id: "ffffff",
-            colors: { backgroundColor: "#FFFFFF", backgroundCardColor: "#e9e9e9", textColor: "#1B1E23" },
+            colors: { backgroundColor: "#FFFFFF", backgroundCardColor: "#e9e9e9", textColor: "#000000" },
             name: "white",
             text: "Day",
             icon: "../../public/images/sun.svg",
@@ -47,6 +49,7 @@ export default function ChangeTheme() {
     function peakColor(color: Colors) {
         document.documentElement.style.setProperty("--main-color", color.mainColor);
         document.documentElement.style.setProperty("--main-hover-color", color.mainHoverColor);
+        document.documentElement.style.setProperty("--button-text-color", color.buttonTextColor);
 
         localStorage.setItem("mainColors", JSON.stringify(color));
     }
@@ -62,7 +65,7 @@ export default function ChangeTheme() {
     return (
         <div className="changeThemeBox flex-column">
             <div className="titleText">
-              <img src="../../public/images/settings.svg" alt="" />
+              <SettingsIcon />
               <p>Цветовая тема</p>
             </div>
             <div className="changeThemeInfo flex-column">

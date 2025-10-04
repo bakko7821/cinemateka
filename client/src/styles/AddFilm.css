@@ -76,6 +76,7 @@
     padding: 8px;
     border-radius: 12px;
     background-color: var(--main-color);
+    color: var(--button-text-color);
     transition: background-color 0.5s;
 }
 
@@ -187,6 +188,7 @@
 }
 
 .userReviewBox .headingBox button {
+    color: var(--button-text-color);
     background-color: transparent;
 }
 
@@ -199,14 +201,18 @@
 }
 
 .reviewBox textarea {
-    background-color: var(--background-color);
     height: fit-content;
     width: 100%;
     resize: vertical;
     overflow: hidden;
 }
 
+.reviewBox .floating-input label svg {
+    color: var(--secondary-text-color);
+}
+
 .userReviewBox .sendReviewButton {
+    color: var(--button-text-color);
     padding: 8px;
     gap: 8px;
     height: 100%;

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ActiveStar, NonActiveStar } from "../icons/Icons";
 
 export default function RatingSelector({
   value,
@@ -12,7 +13,6 @@ export default function RatingSelector({
   return (
     <div className="ratingBox flex-center">
       {Array.from({ length: 10 }, (_, i) => i + 1).map((num) => {
-        // определяем, активная ли картинка
         const isActive = hoverValue !== null ? num <= hoverValue : num <= value;
 
         return (
@@ -23,12 +23,7 @@ export default function RatingSelector({
             onMouseEnter={() => setHoverValue(num)}
             onMouseLeave={() => setHoverValue(null)}
           >
-            <img
-              src={isActive ? "../../public/images/activeStar.svg" : "../../public/images/nonActiveStar.svg"}
-              alt={`Оценка ${num}`}
-              width={32}
-              height={32}
-            />
+            {isActive ? <ActiveStar /> : <NonActiveStar />}
           </button>
         );
       })}
