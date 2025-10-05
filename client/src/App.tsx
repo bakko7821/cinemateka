@@ -7,8 +7,7 @@ function App() {
   useApplyTheme()
   
   return (
-    <>
-      
+    <>  
       <BrowserRouter>
         <Header />
         <Main />

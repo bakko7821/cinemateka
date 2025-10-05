@@ -33,7 +33,7 @@ function Header() {
 
   return (
     <div className="headerBox flex-between">
-      <img src="/images/logo.svg" alt="logo" onClick={() => navigate("/")} />
+      <p className="logo" onClick={() => navigate("/")}>Кинотека</p>
       {isAuth ? (
         <div className="userNavBox flex-center">
           <div className="searchBox flex-center">

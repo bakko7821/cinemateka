@@ -42,93 +42,88 @@ export default function RegisterCard(): JSX.Element {
   };
 
   return (
-    <div className="registerBox flex-column flex-center">
-      <p className="headingText">Регистрация</p>
-      <button className="useAuthButton flex-center">
-        <img src="../../public/images/google.svg" alt="" />
-        Вход с аккаунтом Google
-      </button>
-      <button className="useAuthButton flex-center">
-        <img src="../../public/images/apple.svg" alt="" />
-        Вход с аккаунтом Apple
-      </button>
-      <div className="orBox flex-center">
-        <span></span>
-        <p>ИЛИ</p>
-        <span></span>
+    <div className="registerBox flex-column">
+      <div className="backgroundText"></div>
+      <div className="registerCard flex-column">
+        <p className="headingText">Регистрация</p>
+        <form onSubmit={handleSubmit} className="flex-column flex-center">
+          <div className="fullNameBox flex-center">
+            <div className="floating-input">
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                value={form.firstname}
+                onChange={handleChange}
+                placeholder="Имя"
+                required
+              />
+              <label htmlFor="firstname">Имя</label>
+            </div>
+
+            <div className="floating-input">
+              <input
+                type="text"
+                id="lastname"
+                name="lastname"
+                value={form.lastname}
+                onChange={handleChange}
+                placeholder="Фамилия"
+                required
+              />
+              <label htmlFor="lastname">Фамилия</label>
+            </div>
+          </div>
+
+          <div className="floating-input">
+            <input
+              type="text"
+              id="username"
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="@Имя пользователя"
+              required
+            />
+            <label htmlFor="username">@Имя пользователя</label>
+          </div>
+
+          <div className="floating-input">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Электронная почта"
+              required
+            />
+            <label htmlFor="email">Электронная почта</label>
+          </div>
+
+          <div className="floating-input">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Пароль"
+              required
+            />
+            <label htmlFor="password">Пароль</label>
+          </div>
+          <div className="rememberBox">
+              <input className="rememberCheckbox" type="checkbox" id="remember" />
+              <label className="rememberLabel" htmlFor="remember">
+                Запомнить меня
+              </label>
+            </div>
+          <button type="submit">Зарегистрироваться</button>
+          <Link to={"/login"}>Уже есть аккаунт? Войти в аккаунт</Link>
+        </form>
       </div>
-
-      <form onSubmit={handleSubmit} className="flex-column flex-center">
-        <div className="fullNameBox flex-center">
-          <div className="floating-input">
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              value={form.firstname}
-              onChange={handleChange}
-              placeholder="Имя"
-              required
-            />
-            <label htmlFor="firstname">Имя</label>
-          </div>
-
-          <div className="floating-input">
-            <input
-              type="text"
-              id="lastname"
-              name="lastname"
-              value={form.lastname}
-              onChange={handleChange}
-              placeholder="Фамилия"
-              required
-            />
-            <label htmlFor="lastname">Фамилия</label>
-          </div>
-        </div>
-
-        <div className="floating-input">
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={form.username}
-            onChange={handleChange}
-            placeholder="@Имя пользователя"
-            required
-          />
-          <label htmlFor="username">@Имя пользователя</label>
-        </div>
-
-        <div className="floating-input">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Электронная почта"
-            required
-          />
-          <label htmlFor="email">Электронная почта</label>
-        </div>
-
-        <div className="floating-input">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Пароль"
-            required
-          />
-          <label htmlFor="password">Пароль</label>
-        </div>
-        <p className="ifUserHaveAccount">Уже есть аккаунт? <Link to={"/login"}>Войти в аккаунт</Link></p>
-
-        <button type="submit">Зарегистрироваться</button>
-      </form>
+      
 
       {message && (
         <div className="notificationMessage flex-center">

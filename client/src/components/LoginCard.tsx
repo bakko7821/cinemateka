@@ -58,60 +58,50 @@ export default function LoginCard(): JSX.Element {
 
   return (
     <>
-    <div className="loginBox flex-column flex-center">
-      <p className="headingText">Вход</p>
-      <button className="useAuthButton flex-center">
-        <img src="../../public/images/google.svg" alt="" />
-        Вход с аккаунтом Google
-      </button>
-      <button className="useAuthButton flex-center">
-        <img src="../../public/images/apple.svg" alt="" />
-        Вход с аккаунтом Apple
-      </button>
-      <div className="orBox flex-center">
-        <span></span>
-        <p>ИЛИ</p>
-        <span></span>
+    <div className="loginBox flex-column">
+      <div className="backgroundText"></div>
+      <div className="loginCard flex-column">
+        <p className="headingText">Вход в личный кабинет</p>
+        <form onSubmit={handleSubmit} className="flex-column flex-center">
+          <div className="floating-input">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Электронная почта"
+              required
+            />
+            <label htmlFor="email">Электронная почта</label>
+          </div>
+          <div className="floating-input">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Пароль"
+              required
+            />
+            <label htmlFor="password">Пароль</label>
+          </div>
+          <div className="linksBox flex-between">
+            <div className="rememberBox flex-center">
+              <input className="rememberCheckbox" type="checkbox" id="remember" />
+              <label className="rememberLabel" htmlFor="remember">
+                Запомнить меня
+              </label>
+            </div>
+            <p className="ifUserFoggotPassword">
+              <Link to="/recovery-password">Забыли пароль?</Link>
+            </p>
+          </div>
+          <button type="submit">Войти</button>
+          <Link to="/register">Впервые на сайте? Зарегистрироваться</Link>
+        </form>
       </div>
-
-      <form onSubmit={handleSubmit} className="flex-column flex-center">
-        <div className="floating-input">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Электронная почта"
-            required
-          />
-          <label htmlFor="email">Электронная почта</label>
-        </div>
-
-        <div className="floating-input">
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={form.password}
-            onChange={handleChange}
-            placeholder="Пароль"
-            required
-          />
-          <label htmlFor="password">Пароль</label>
-        </div>
-
-        <div className="linksBox flex-column">
-          <p className="ifUserFoggotPassword">
-            <Link to="/recovery-password">Забыли пароль?</Link>
-          </p>
-          <p className="ifUserHaveAccount">
-            Впервые на сайте? <Link to="/register">Зарегистрироваться</Link>
-          </p>
-        </div>
-
-        <button type="submit">Войти</button>
-      </form>
 
       {message && (
         <div className="notificationMessage flex-center">
