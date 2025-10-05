@@ -59,6 +59,10 @@
     cursor: pointer;
 }
 
+.searchResults .searchFilmCard img {
+    width: 100%;
+}
+
 .searchResults .searchFilmCard p {
     font-weight: 400;
     text-transform: none;

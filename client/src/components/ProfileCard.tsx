@@ -2,7 +2,7 @@ import { useState, useEffect, type JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../styles/Profile.css'
-import { EditIcon, FollowIcon, GiftIcon, UnFollowIcon } from "../icons/Icons";
+import { ActiveStar, EditIcon, FollowIcon, GiftIcon, NonActiveStar, UnFollowIcon } from "../icons/Icons";
 
 interface User {
   _id: string;
@@ -15,12 +15,12 @@ interface User {
 }
 
 interface GenresResponse {
-    genres: GenreStat[];
+  genres: GenreStat[];
 }
 
 interface GenreStat {
-    genre: string;
-    count: number;
+  genre: string;
+  count: number;
 }
 
 interface Film {
@@ -31,12 +31,12 @@ interface Film {
 }
 
 interface Reviews {
-    filmId: string;
-    text: string;
-    rating: number;
-    createdAt: Date;
-    _id: string;
-    film: Film;
+  filmId: string;
+  text: string;
+  rating: number;
+  createdAt: Date;
+  _id: string;
+  film: Film;
 }
 
 interface IUser {
@@ -47,123 +47,127 @@ interface IUser {
   image?: string;
 }
 
-export default function ProfileCard() : JSX.Element {
-    const { id } = useParams<{ id: string }>();
-    const [user, setUser] = useState<User | null>(null);
-    const [reviews, setReviews] = useState<Reviews[]>([]);
-    const [isAuth, setIsAuth] = useState(false)
-    const [userAvatar, setUserAvatar] = useState<string | null>(null);
-    const [genres, setGenres] = useState<GenreStat[]>([]);
-    const [error, setError] = useState<string | null>(null);
-    const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [isFollowing, setIsFollowing] = useState(false);
+export default function ProfileCard(): JSX.Element {
+  const { id } = useParams<{ id: string }>();
+  const [user, setUser] = useState<User | null>(null);
+  const [reviews, setReviews] = useState<Reviews[]>([]);
+  const [isAuth, setIsAuth] = useState(false);
+  const [userAvatar, setUserAvatar] = useState<string | null>(null);
+  const [genres, setGenres] = useState<GenreStat[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [isFollowing, setIsFollowing] = useState(false);
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!id) return;
-
-        axios
-            .get<User>(`http://localhost:5000/users/${id}`)
-            .then(res => setUser(res.data))
-            .catch(err => console.error(err));
-    }, [id]);
-
-    useEffect(() => {
-        const authUser = localStorage.getItem("authUser");
-        if (authUser) {
-            const parsed = JSON.parse(authUser);
-            setIsAuth(parsed?._id === id);
-
-            // проверяем, подписан ли
-            if (user && parsed) {
-                setIsFollowing(user?.favorites?.includes(parsed._id) ?? false);
-            }
-        }
-    }, [user, id]);
-
-    useEffect(() => {
-        setUserAvatar(user?.image ? user.image : null);
-    }, [user]);
-
-    useEffect(() => {
+  // Загружаем данные профиля
+  useEffect(() => {
     if (!id) return;
+    axios
+      .get<User>(`http://localhost:5000/users/${id}`)
+      .then(res => setUser(res.data))
+      .catch(err => console.error(err));
+  }, [id]);
 
-        const fetchGenres = async () => {
-            try {
-            setLoading(true);
+  // Проверяем, является ли это мой профиль
+  useEffect(() => {
+    const authUser = localStorage.getItem("authUser");
+    if (!authUser) return;
+    const parsed = JSON.parse(authUser);
+    setIsAuth(parsed?._id === id);
+  }, [id]);
 
-            const res = await axios.get<GenresResponse>(`http://localhost:5000/users/${id}/genres`);
-            setGenres(res.data.genres);
+  // Проверяем, подписан ли Я на этого пользователя
+  useEffect(() => {
+    const checkFollowStatus = async () => {
+      const authUserString = localStorage.getItem("authUser");
+      if (!authUserString || !id) return;
 
-            } catch (err) {
-            setError("Ошибка при загрузке жанров");
-            console.error(err);
-            } finally {
-            setLoading(false);
-            }
-        };
+      const parsed = JSON.parse(authUserString);
+      try {
+        const res = await axios.get<User>(`http://localhost:5000/users/${parsed._id}`);
+        setIsFollowing(res.data.favorites.includes(id)); // если мой favorites содержит id этого профиля
+      } catch (err) {
+        console.error("Ошибка при проверке подписки:", err);
+      }
+    };
 
-        fetchGenres();
-    }, [id]);
+    checkFollowStatus();
+  }, [id]);
 
-    useEffect(() => {
-        if (!id) return;
+  // Загружаем остальные данные
+  useEffect(() => {
+    setUserAvatar(user?.image ? user.image : null);
+  }, [user]);
 
-        const fetchReviews = async () => {
-            try {
-                const res = await axios.get<Reviews[]>(`http://localhost:5000/users/${id}/reviews`)
-                setReviews(res.data);
-            } catch (err) {
-                console.log("Ошибка при загрузке рецензий:", err)
-            }
-        };
+  useEffect(() => {
+    if (!id) return;
+    const fetchGenres = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get<GenresResponse>(`http://localhost:5000/users/${id}/genres`);
+        setGenres(res.data.genres);
+      } catch (err) {
+        setError("Ошибка при загрузке жанров");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchGenres();
+  }, [id]);
 
-        fetchReviews();
-    }, [id]);
+  useEffect(() => {
+    if (!id) return;
+    const fetchReviews = async () => {
+      try {
+        const res = await axios.get<Reviews[]>(`http://localhost:5000/users/${id}/reviews`);
+        setReviews(res.data);
+      } catch (err) {
+        console.log("Ошибка при загрузке рецензий:", err);
+      }
+    };
+    fetchReviews();
+  }, [id]);
 
-    async function handleFollow(targetId: string | undefined) {
-        if (!targetId) return;
+  async function handleFollow(targetId: string | undefined) {
+    if (!targetId) return;
 
-        const authUser = localStorage.getItem("authUser");
-        if (!authUser) return navigate("/login");
+    const authUser = localStorage.getItem("authUser");
+    if (!authUser) return navigate("/login");
 
-        const parsed = JSON.parse(authUser);
+    const parsed = JSON.parse(authUser);
 
-        try {
-            const res = await axios.post(`http://localhost:5000/users/${targetId}/favorite`, {
-            userId: parsed._id,
-            });
+    try {
+      const res = await axios.post(`http://localhost:5000/users/${targetId}/favorite`, {
+        userId: parsed._id,
+      });
 
-            setIsFollowing(!isFollowing); // переключаем состояние
-            console.log(res.data.msg);
-        } catch (err) {
-            console.error("Ошибка при подписке:", err);
-        }
+      setIsFollowing(!isFollowing); // переключаем состояние локально
+      console.log(res.data.msg);
+    } catch (err) {
+      console.error("Ошибка при подписке:", err);
     }
+  }
 
-    useEffect(() => {
-        const fetchFavoriteUsers = async () => {
-            setLoading(true);
-            setError(null);
-
-            try {
-                const response = await fetch(`http://localhost:5000/users/${id}/favorite`);
-                if (!response.ok) {
-                throw new Error("Ошибка при получении данных");
-                }
-                const data: IUser[] = await response.json();
-                setFavoriteUsers(data);
-            } catch (err: unknown) {
-                setError(err instanceof Error ? err.message : "Неизвестная ошибка");
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchFavoriteUsers()
-    }, [id]) 
+  useEffect(() => {
+    const fetchFavoriteUsers = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const response = await fetch(`http://localhost:5000/users/${id}/favorite`);
+        if (!response.ok) throw new Error("Ошибка при получении данных");
+        const data: IUser[] = await response.json();
+        setFavoriteUsers(data);
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : "Неизвестная ошибка");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFavoriteUsers();
+  }, [id]);
 
     if (loading) return <p>Загрузка...</p>;
     if (error) return <p>{error}</p>;
@@ -301,13 +305,13 @@ export default function ProfileCard() : JSX.Element {
                                         <p className="titleText">{review.film.title} ({review.film.year})</p>
                                         <span></span>
                                         <div className="stars flex-center">
-                                            {Array.from({ length: 10 }).map((_, index) => (
-                                                <img
-                                                    key={index}
-                                                    src={index < review.rating ? "/images/activeStar.svg" : "/images/nonActiveStar.svg"}
-                                                    alt={index < review.rating ? "Активная звезда" : "Пустая звезда"}
-                                                />
-                                            ))}
+                                        {Array.from({ length: 10 }).map((_, index) =>
+                                            index < review.rating ? (
+                                            <ActiveStar key={index} />
+                                            ) : (
+                                            <NonActiveStar key={index} />
+                                            )
+                                        )}
                                         </div>
                                     </div>
                                     <button className="goToReviewButton flex-center" onClick={() => navigate(`/review/${review._id}`)}>

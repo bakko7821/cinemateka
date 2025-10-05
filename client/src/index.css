@@ -102,7 +102,7 @@ img {
 	vertical-align: top;
 }
 
-img, svg {
+svg {
   width: 24px;
   height: 24px;
 	height: auto;
@@ -289,7 +289,7 @@ body::-webkit-scrollbar-thumb {
   position: absolute;
   padding: 16px;
   border-radius: 16px;
-  background-color: var(--main-color);
+  background-color: var(--background-card-color);
 }
 
 .headerBox img {

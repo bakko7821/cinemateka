@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState, type JSX } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { LeftArrowIcon } from "../icons/Icons";
+import { ActiveStar, LeftArrowIcon, NonActiveStar } from "../icons/Icons";
 
 interface ReviewResponse {
   review: Review;
@@ -19,6 +19,7 @@ interface Review {
 
 interface Film {
   _id: string;
+  kpId: string;
   title: string;
   poster: string;
   year: number;
@@ -68,7 +69,7 @@ export default function ReviewCard() : JSX.Element {
         </div>
         
         <div className="reviewPage">
-            <div className="choosedFilmInfoBox flex-column">
+            <div className="choosedFilmInfoBox flex-column" onClick={() => window.open(`https://www.kinopoisk.ru/film/${data?.review.film?.kpId}`)}>
                 <p className="titleText">Информация о фильме:</p>
                 {data?.review.film && (
                     <div className="filmInfo">
@@ -109,21 +110,13 @@ export default function ReviewCard() : JSX.Element {
                     </div>
                     <span></span>
                     <div className="stars flex-center">
-                        {Array.from({ length: 10 }).map((_, index) => (
-                        <img
-                            key={index}
-                            src={
-                            index < (data?.review.rating ?? 0) // 👈 тут rating
-                                ? "/images/activeStar.svg"
-                                : "/images/nonActiveStar.svg"
-                            }
-                            alt={
-                            index < (data?.review.rating ?? 0)
-                                ? "Активная звезда"
-                                : "Пустая звезда"
-                            }
-                        />
-                        ))}
+                    {Array.from({ length: 10 }).map((_, index) =>
+                        index < (data?.review.rating ?? 0) ? (
+                        <ActiveStar key={index}/>
+                        ) : (
+                        <NonActiveStar key={index}/>
+                        )
+                    )}
                     </div>
                 </div>
                 <p className="reviewText">{data?.review.text}</p>

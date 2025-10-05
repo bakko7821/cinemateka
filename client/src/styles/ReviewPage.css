@@ -21,6 +21,7 @@
 }
 
 .reviewPage .choosedFilmInfoBox {
+    cursor: pointer;
     min-height: auto;
 }
 
@@ -83,7 +84,7 @@
 }
 
 .reviewInfoBox .userInfo:hover {
-    background-color: #31333e;
+    background-color: var(--background-color);
     transition: background-color 0.5s;
 }
 

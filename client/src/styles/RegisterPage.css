@@ -99,8 +99,10 @@ form button:hover {
     background-color: var(--main-hover-color);
 }
 
-.registerBox .floating-input input:focus + label, .floating-input input:not(:placeholder-shown) + label,
-.loginBox .floating-input input:focus + label, .floating-input input:not(:placeholder-shown) + label {
+.registerBox .floating-input input:focus + label, 
+.registerBox .floating-input input:not(:placeholder-shown) + label,
+.loginBox .floating-input input:focus + label, 
+.loginBox .floating-input input:not(:placeholder-shown) + label {
     display: flex;
     align-items: center;
     top: -16px;

@@ -280,5 +280,5 @@
 }
 
 .favoriteUsersBox .usersCardsBox .userCard:hover {
-    background-color: #31333e;
+    background-color: var(--background-color);
 }
