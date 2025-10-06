@@ -233,11 +233,11 @@ export default function AddFilmCard() {
                 </label>
               </div>
               {searchResults.length > 0 && (
-                <ul className="searchResults">
+                <ul className="searchResults flex-column">
                   {searchResults.map((filmItem, idx) => (
                     <li
                       key={idx}
-                      className="searchFilmCard flex-center"
+                      className="searchFilmCard"
                       onClick={() => setFilm(filmItem)} // ✅ теперь правильно
                     >
                       {filmItem.poster && (

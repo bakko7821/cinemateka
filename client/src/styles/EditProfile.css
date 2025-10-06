@@ -90,8 +90,8 @@
 
 .input-file {
     position: absolute;
-    top: 45px;
-    left: 45px;
+    top: 55px;
+    left: 55px;
     background-color: rgba(0, 0, 0, 0.8);
     width: fit-content;
     height: fit-content;

@@ -47,6 +47,9 @@
     gap: 8px;
     position: absolute;
     z-index: 9999;
+    -webkit-box-shadow: 4px 4px 8px 0px var(--main-color);
+    -moz-box-shadow: 4px 4px 8px 0px var(--main-color);
+    box-shadow: 4px 4px 8px 0px var(--main-color);
 }
 
 .searchResults img {
@@ -55,12 +58,11 @@
 }
 
 .searchResults .searchFilmCard {
+    display: flex;
+    align-items: center;
+    justify-content: start;
     gap: 8px;
     cursor: pointer;
-}
-
-.searchResults .searchFilmCard img {
-    width: 100%;
 }
 
 .searchResults .searchFilmCard p {
