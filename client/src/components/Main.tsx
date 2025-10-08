@@ -8,6 +8,7 @@ import ProfilePage from "../pages/ProfilePage";
 import AddFilmPage from "../pages/AddFilmPage";
 import ReviewPage from "../pages/ReviewPage";
 import EditProfilePage from "../pages/EditProfilePage";
+import FavoriteUsersPage from "../pages/FavoriteUsersPage";
 
 function Main() {
     return (
@@ -21,6 +22,7 @@ function Main() {
                 <Route path="/profile/:id/edit" element={<EditProfilePage />}/>
                 <Route path="/add" element={<AddFilmPage />} />
                 <Route path="/review/:id" element={<ReviewPage />}/>
+                <Route path="/favorites/:id" element={<FavoriteUsersPage />}/>
             </Routes>
         </div>
     )

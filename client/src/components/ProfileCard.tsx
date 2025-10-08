@@ -55,8 +55,8 @@ export default function ProfileCard(): JSX.Element {
   const [userAvatar, setUserAvatar] = useState<string | null>(null);
   const [genres, setGenres] = useState<GenreStat[]>([]);
   const [error, setError] = useState<string | null>(null);
-  const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);
   const [loading, setLoading] = useState(true);
+  const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);
   const [isFollowing, setIsFollowing] = useState(false);
 
   const navigate = useNavigate();

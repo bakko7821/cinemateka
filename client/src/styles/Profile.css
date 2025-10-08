@@ -251,12 +251,15 @@
     padding-left: 8px;
 }
 
-.favoriteUsersBox .usersCardsBox {
+.usersCardsBox {
+    padding: 8px;
+    border-radius: 28px;
+    background-color: var(--background-card-color);
     width: 100%;
     gap: 8px;
 }
 
-.favoriteUsersBox .usersCardsBox .userCard {
+.usersCardsBox .userCard {
     display: flex;
     align-items: center;
     justify-content: start;
@@ -264,21 +267,32 @@
     cursor: pointer;
     padding: 8px;
     gap: 8px;
-    border-radius: 12px;
+    border-radius: 20px;
     transition: background-color 0.5s;
 }
 
-.favoriteUsersBox .usersCardsBox .userCard .userAvatar {
+.usersCardsBox .userCard .userAvatar {
     width: 56px;
     height: 56px;
     border-radius: 100%;
 }
 
-.favoriteUsersBox .usersCardsBox .userCard .textBox .fullNameUser{
+.usersCardsBox .userCard .textBox .fullNameUser{
     white-space: nowrap;
     overflow: hidden;
 }
 
-.favoriteUsersBox .usersCardsBox .userCard:hover {
+.usersCardsBox .userCard:hover {
     background-color: var(--background-color);
+}
+
+.leftBox {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.leftBox .backButton {
+    background-color: transparent;
 }
