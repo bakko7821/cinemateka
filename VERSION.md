@@ -254,3 +254,12 @@
 ## commit 14.27.5
 
 - Добавлена страница **FavoriteUsersPage.tsx**
+
+## commit 14.28.5
+
+- Логика с **AddFilmCard.tsx**, перенесена в **/pages/AddFilmPage.tsx**
+- Файл **AddFilmCard.tsx** разбит на компоненты: 
+```/components/AddFilmPage/ChosedFilmInfoComponent.tsx```
+```/components/AddFilmPage/FindFilmComponent.tsx```
+```/components/AddFilmPage/UserReviewComponent.tsx```
+- Файл **AddFilmCard.tsx** - УДАЛЕН
