@@ -1,10 +1,8 @@
 import ReviewCard from "../components/ReviewCard"
 import '../styles/ReviewPage.css'
 
-function ReviewPage()  {
+export const ReviewPage = () => {
     return (
         <ReviewCard />
     )
 }
-
-export default ReviewPage

@@ -1,5 +1,4 @@
 # Кинотека - Контроль версий
----
 ## commit 0.0.0
 
 - Развернули проект используя Vite( **TypeScript + SWC** )
@@ -263,3 +262,22 @@
 ```/components/AddFilmPage/FindFilmComponent.tsx```
 ```/components/AddFilmPage/UserReviewComponent.tsx```
 - Файл **AddFilmCard.tsx** - УДАЛЕН
+
+
+## commit 14.29.5
+
+- Логика с **EditProfileCard.tsx**, перенесена в **/pages/EditProfilePage.tsx**
+- Файл **EditProfileCard.tsx** разбит на компоненты: 
+```/components/EditProfilePage/EditProfileHeader.tsx```
+```/components/EditProfilePage/EditProfileForm.tsx```
+- Файл **EditProfileCard.tsx** - УДАЛЕН
+
+---
+
+- Логика с **ProfileCard.tsx**, перенесена в **/pages/ProfilePage.tsx**
+- Файл **ProfileCard.tsx** разбит на компоненты: 
+```/components/ProfilePage/ProfileFavorites.tsx```
+```/components/ProfilePage/ProfileFollowing.tsx```
+```/components/ProfilePage/ProfileHeader.tsx```
+```/components/ProfilePage/ProfileReviews.tsx```
+- Файл **ProfileCard.tsx** - УДАЛЕН

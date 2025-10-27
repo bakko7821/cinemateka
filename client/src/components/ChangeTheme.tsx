@@ -15,7 +15,7 @@ interface ThemeColors {
 }
 
 export default function ChangeTheme() {
-    const [isSubscribe, setIsSubscribe] = useState(true); 
+    const [isSubscribe] = useState(true); 
     const navigate = useNavigate()
 
     const colors = [

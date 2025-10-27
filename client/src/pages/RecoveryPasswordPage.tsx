@@ -1,9 +1,7 @@
 import RecoveryPasswordCard from "../components/RecoveryPasswordCard"
 
-function RecoveryPasswordPage() {
+export const RecoveryPasswordPage = () => {
     return (
         <RecoveryPasswordCard />
     )
 }
-
-export default RecoveryPasswordPage

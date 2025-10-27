@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState} from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { LeftArrowIcon } from "../icons/Icons";
 
@@ -10,7 +10,7 @@ interface IUser {
   image?: string;
 }
 
-export default function FavoriteUsersPage() : JSX.Element {
+export const FavoriteUsersPage = () => {
     const {id} = useParams()
     const navigate = useNavigate()
     const [favoriteUsers, setFavoriteUsers] = useState<IUser[]>([]);

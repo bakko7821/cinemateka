@@ -1,10 +1,8 @@
 import RegisterCard from "../components/RegisterCard"
 import '../styles/RegisterPage.css'
 
-function RegisterPage() {
+export const RegisterPage = () => {
     return (
         <RegisterCard />
     )
 }
-
-export default RegisterPage

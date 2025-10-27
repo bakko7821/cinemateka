@@ -1,10 +1,8 @@
 import LoginCard from "../components/LoginCard"
 import '../styles/RegisterPage.css'
 
-function LoginPage() {
+export const LoginPage = () => {
     return (
         <LoginCard />
     )
 }
-
-export default LoginPage

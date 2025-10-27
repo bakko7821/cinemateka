@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import Header from "../components/Home/HeaderHomePage";
-import Advantages from "../components/Home/AdvantagesHomePage";
-import RollFilms from "../components/Home/RollFilmsHomePage";
-import UserAuth from "../components/Home/UserAuthHomePage";
+import Header from "../components/HomePage/HeaderHomePage";
+import Advantages from "../components/HomePage/AdvantagesHomePage";
+import RollFilms from "../components/HomePage/RollFilmsHomePage";
+import UserAuth from "../components/HomePage/UserAuthHomePage";
 
 interface JwtPayload {
   id: string;
   exp: number;
 }
 
-function HomePage() {
+export const HomePage = () => {
     const [isAuth, setIsAuth] = useState(false);
     
         useEffect(() => {
@@ -43,5 +43,3 @@ function HomePage() {
         </>
     )
 }
-
-export default HomePage

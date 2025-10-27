@@ -36,7 +36,6 @@ export default function RollFilms(): JSX.Element {
 
         const randomFilms = getRandomFilms(res.data);
         setFilms(randomFilms);
-        console.log(randomFilms)
 
         setLoading(false);
       } catch (err) {
