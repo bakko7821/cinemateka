@@ -281,3 +281,10 @@
 ```/components/ProfilePage/ProfileHeader.tsx```
 ```/components/ProfilePage/ProfileReviews.tsx```
 - Файл **ProfileCard.tsx** - УДАЛЕН
+
+## commit 14.30.5
+
+- Логика из **/components/LoginCard.tsx** -> перенесена в -> **/pages/LoginPage.tsx**
+- Логика из **/components/RegisterCard.tsx** -> перенесена в -> **/pages/RegisterPage.tsx**
+- Логика из **/components/RecoveryPasswordCard.tsx** -> перенесена в -> **/pages/RecoveryPasswordPage.tsx**
+- Логика из **/components/ReviewCard.tsx** -> перенесена в -> **/pages/ReviewPage.tsx**
