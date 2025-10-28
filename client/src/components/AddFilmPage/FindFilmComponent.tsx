@@ -10,6 +10,7 @@ export interface FilmData {
   year?: number;
   poster?: string | null;
   genres?: string[];
+  chance?: number;
 }
 
 interface FindFilmProps {

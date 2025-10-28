@@ -1,0 +1,9 @@
+.addFilmToRollBox, .addFilmToRollBoxContent {
+    width: 100%;
+}
+
+.addFilmToRollBox .choosedFilmInfoBox {
+    height: fit-content;
+    min-height: auto;
+}
+

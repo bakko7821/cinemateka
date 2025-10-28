@@ -288,3 +288,8 @@
 - Логика из **/components/RegisterCard.tsx** -> перенесена в -> **/pages/RegisterPage.tsx**
 - Логика из **/components/RecoveryPasswordCard.tsx** -> перенесена в -> **/pages/RecoveryPasswordPage.tsx**
 - Логика из **/components/ReviewCard.tsx** -> перенесена в -> **/pages/ReviewPage.tsx**
+
+## commit 14.31.5
+
+- В файл **pages/RollFilmPage.tsx** были добавленны компоненты **FindFilmComponent.tsx** и **ChosedFilmInfoComponent.tsx**
+- Были созданы компоненты **ChosedFilmsList.tsx** и шаблон компоненты **Wheel.tsx**

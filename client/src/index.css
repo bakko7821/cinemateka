@@ -248,6 +248,10 @@ body::-webkit-scrollbar-thumb {
   border: none;
 }
 
+.flex {
+  display: flex;
+}
+
 .flex-center {
   display: flex;
   align-items: center;
@@ -294,4 +298,18 @@ body::-webkit-scrollbar-thumb {
 .headerBox img {
   cursor: pointer;
   object-fit: none;
+}
+
+.g16 {
+  gap: 16px;
+}
+
+.alertBox {
+  top: 16px;
+  position: absolute;
+  padding: 16px;
+  color: var(--text-color);
+  border-radius: 12px;
+  font-size: clamp(0.8rem, 2vw, 1rem);
+  background-color: var(--background-card-color);
 }
