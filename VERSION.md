@@ -293,3 +293,7 @@
 
 - В файл **pages/RollFilmPage.tsx** были добавленны компоненты **FindFilmComponent.tsx** и **ChosedFilmInfoComponent.tsx**
 - Были созданы компоненты **ChosedFilmsList.tsx** и шаблон компоненты **Wheel.tsx**
+
+## commit 14.32.5
+
+- Было сделанно колесо. (ПОЧТИ)
