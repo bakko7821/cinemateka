@@ -297,3 +297,9 @@
 ## commit 14.32.5
 
 - Было сделанно колесо. (ПОЧТИ)
+
+## commit 14.33.5 (У меня сгорело)
+
+- Удалены компоненты **ChosedFilmsList.tsx** и **Wheel.tsx**
+- Удалена страница **pages/RollFilmPage.tsx**
+- Удалены стили **styles/RollFilm.css**
