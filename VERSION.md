@@ -303,3 +303,7 @@
 - Удалены компоненты **ChosedFilmsList.tsx** и **Wheel.tsx**
 - Удалена страница **pages/RollFilmPage.tsx**
 - Удалены стили **styles/RollFilm.css**
+
+## commit 14.33.6
+
+- Добавлена перенаправка на **HomePage.tsx** при попадании на несуществующую страницу
