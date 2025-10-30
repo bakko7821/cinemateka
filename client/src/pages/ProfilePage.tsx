@@ -147,7 +147,7 @@ export const ProfilePage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <>
+    <div className="page flex-column g16">
       <ProfileHeader
         user={user}
         isAuth={isAuth}
@@ -159,6 +159,6 @@ export const ProfilePage = () => {
         <ProfileFollowings users={favoriteUsers} />
       </div>
       <ProfileReviews reviews={reviews} />
-    </>
+    </div>
   );
 }

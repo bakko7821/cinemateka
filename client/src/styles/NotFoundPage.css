@@ -1,0 +1,10 @@
+.errorText {
+    font-size: clamp(9rem, 2vw, 10rem);
+    font-weight: 900;
+    color: var(--main-color);
+    text-transform: uppercase;
+}
+
+.descriptionText {
+    font-size: var(--rem1-5);
+}

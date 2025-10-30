@@ -81,7 +81,7 @@ export const EditProfilePage = () => {
   }
 
   return (
-    <>
+    <div className="page flex-column g16">
       <EditProfileHeader username={user?.username} onSave={handleSave} />
 
       <div className="editProfilePage">
@@ -106,6 +106,6 @@ export const EditProfilePage = () => {
           <p>Вы не можете редактировать чужой профиль</p>
         )}
       </div>
-    </>
+    </div>
   );
 };

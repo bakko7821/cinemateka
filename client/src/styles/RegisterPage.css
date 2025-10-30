@@ -78,13 +78,13 @@
 }
 
 .headingText {
-    font-size: clamp(1.5rem, 2vh, 2rem);
+    font-size: var(--rem2);
     font-weight: 700;
     color: var(--main-color);
 }
 
 form button {
-    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-size: var(--rem1-5);
     font-weight: 500;
     line-height: 1.3;
     width: 100%;
@@ -109,5 +109,5 @@ form button:hover {
     left: 16px;
     padding: 8px 16px;
     background-color: var(--background-color);
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: var(--rem1);
     color: var(--secondary-text-color); }

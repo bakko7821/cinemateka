@@ -95,7 +95,7 @@
 }
 
 .reviewInfoBox .headingBox .userInfo .fullNameUser{
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: var(--rem1);
     font-weight: 500;
     color: var(--text-color);
     line-height: 1.3;
@@ -103,7 +103,7 @@
 
 .reviewInfoBox .headingBox .userInfo .userName{
     line-height: 1.5;
-    font-size: clamp(0.6rem, 2vh, 0.8rem);
+    font-size: var(--rem0-875);
     font-weight: 400;
     color: var(--secondary-text-color);
 }

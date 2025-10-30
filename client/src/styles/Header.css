@@ -18,7 +18,7 @@
     color: var(--text-color);
     border: 1px var(--main-color) solid;
     border-radius: 12px;
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: var(--rem1);
     text-transform: uppercase;
     font-weight: 500;
     padding: 8px 16px;
@@ -93,7 +93,7 @@
     background-color: transparent;
     cursor: pointer;
     color: var(--main-color);
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: var(--rem1);
     font-weight: 500;
 }
 

@@ -30,7 +30,7 @@ export const HomePage = () => {
     }, []);
 
     return (
-        <>
+        <div className="page flex-column g16">
         {isAuth ? (
             <UserAuth />
         ) : (
@@ -40,6 +40,6 @@ export const HomePage = () => {
                 <RollFilms />
             </div>
         )}
-        </>
+        </div>
     )
 }

@@ -50,8 +50,8 @@ function Header() {
         </div>
       ) : (
         <div className="signInBox flex-center">
-          <button className="signInButton" onClick={() => navigate("/login")}>Sign In</button>
-          <button className="registerButton" onClick={() => navigate("/register")}>Registration</button>
+          <button className="signInButton" onClick={() => navigate("/auth/login")}>Sign In</button>
+          <button className="registerButton" onClick={() => navigate("/auth/register")}>Registration</button>
         </div>
       )}
     </div>

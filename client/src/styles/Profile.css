@@ -72,14 +72,14 @@
 }
 
 .userInfoBox .textBox .fullNameUser{
-    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-size: var(--rem1-5);
     font-weight: 500;
     color: var(--text-color);
     line-height: 1.3;
 }
 
 .userInfoBox .textBox .userName{
-    font-size: clamp(0.8rem, 2vh, 1rem);
+    font-size: var(--rem1);
     font-weight: 500;
     color: var(--secondary-text-color);
     line-height: 1.5;
@@ -168,7 +168,7 @@
 .nullMessage {
     color: var(--secondary-text-color);
     font-weight: 500;
-    font-size: clamp(1rem, 2vh, 1.5rem);
+    font-size: var(--rem1-5);
     line-height: 1.3;
 }
 

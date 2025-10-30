@@ -39,7 +39,7 @@ export const FavoriteUsersPage = () => {
     if (error) return <p>{error}</p>;
 
     return (
-        <>
+        <div className="page flex-column g16">
             <div className="leftBox">
                 <button className="backButton" onClick={() => navigate(-1)}>
                 <LeftArrowIcon />
@@ -70,6 +70,6 @@ export const FavoriteUsersPage = () => {
                     <p className="nullMessage">Пользователь никого не отслеживает</p> 
                 )}
         </div> 
-        </>
+        </div>
     )
 }

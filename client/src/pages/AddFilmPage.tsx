@@ -38,7 +38,7 @@ export const AddFilmPage = () => {
   }, [message, error]);
 
   return (
-    <>
+    <div className="page flex-column g16">
       <p className="titleText">Добавление рецензии</p>
 
       {!isAuth && (
@@ -62,6 +62,6 @@ export const AddFilmPage = () => {
           <p>{error || message}</p>
         </div>
       )}
-    </>
+    </div>
   );
 };
