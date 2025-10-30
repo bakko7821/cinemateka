@@ -1,6 +1,4 @@
-import type { JSX } from "react";
-
-export default function Advantages(): JSX.Element {
+export const Advantages = () => {
     return (
         <div className="advantagesHomePageBox flex-column flex-center">
             <p className="headingText">Ключевые преимущества</p>

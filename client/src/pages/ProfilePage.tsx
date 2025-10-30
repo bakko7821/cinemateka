@@ -15,6 +15,7 @@ export interface User {
   email: string;
   image: string;
   favorites: string[];
+  reviews: Review[];
 }
 
 export interface GenreStat {
@@ -27,13 +28,14 @@ export interface Film {
   title: string;
   poster: string;
   year: number;
+  kpId: string;
 }
 
 export interface Review {
   filmId: string;
   text: string;
   rating: number;
-  createdAt: Date;
+  createdAt: string;
   _id: string;
   film: Film;
 }

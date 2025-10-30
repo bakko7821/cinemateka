@@ -206,3 +206,73 @@
     color: var(--button-text-color);
     transition: color 0.3s ease;
 }
+
+.randomReviewsList {
+  width: calc(5 * 288px + 4 * 8px); /* 5 карточек + 4 gap */
+  overflow: hidden;
+  position: relative;
+}
+
+.randomReviewsListTrack {
+  display: flex;
+  gap: 8px;
+  animation: scroll 20s linear infinite alternate;
+}
+
+.randomReviewsListTrack .reviewCard {
+    justify-content: start;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    flex: 0 0 288px;
+}
+
+.randomReviewsListTrack .reviewCard .backgroundPoster {
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    filter: blur(1px);
+}
+
+.randomReviewsListTrack .reviewCard .userInfo {
+    width: 100%;
+    border-radius: 12px;
+    padding: 8px;
+    background-color: var(--background-card-color);
+}
+
+.randomReviewsListTrack .reviewCard .userInfo .userAvatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+}
+
+.randomReviewsListTrack .reviewCard .userInfo,
+.randomReviewsListTrack .reviewCard .userReview {
+    z-index: 2;
+}
+
+.randomReviewsListTrack .reviewCard .userReview {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background-color: var(--background-card-color);
+    padding: 8px;
+    -webkit-line-clamp: 3; 
+    display: -webkit-box; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+}
+
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-1 * (288px + 8px) * 5)); /* прокрутка 5 карточек */
+  }
+}

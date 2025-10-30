@@ -310,6 +310,10 @@ body::-webkit-scrollbar-thumb {
   gap: 16px;
 }
 
+.g8 {
+  gap: 8px;
+}
+
 .alertBox {
   top: 16px;
   position: absolute;
@@ -322,4 +326,5 @@ body::-webkit-scrollbar-thumb {
 
 .page {
   width: 1440px;
+  height: 100vh;
 }

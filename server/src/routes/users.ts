@@ -43,9 +43,9 @@ router.put("/review", async (req: Request<{}, {}, AddReviewBody>, res: Response)
     await user.save();
 
     return res.status(200).json({ msg: "Рецензия добавлена", reviews: user.reviews });
-  } catch (err: unknown) {
-    console.error(err);
-    return res.status(500).json({ error: err instanceof Error ? err.message : "Неизвестная ошибка" });
+  } catch (error: unknown) {
+    console.error(error);
+    return res.status(500).json({ error: error instanceof Error ? error.message : "Неизвестная ошибка" });
   }
 });
 
@@ -75,8 +75,8 @@ router.get("/:id/reviews", async (req: Request, res: Response) => {
     });
 
     return res.json(reviewsWithFilms);
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({ error: "Ошибка при загрузке рецензий" });
   }
 });
@@ -268,5 +268,16 @@ router.get("/:id/favorite", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    let users;
+    users = await User.find()
+    res.json(users)
+  } catch (error: unknown) {
+    return res.status(500).json({
+      error: error instanceof Error ? error.message: "Неизвестная ошибка",
+    })
+  }
+})
 
 export default router;

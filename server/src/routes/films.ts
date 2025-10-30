@@ -47,5 +47,21 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const film = await Film.findById(id); // ✅ добавили await
+
+    if (!film) {
+      return res.status(404).json({ msg: "Фильм не найден" });
+    }
+
+    res.json(film);
+  } catch (error: unknown) {
+    console.log(error);
+    res.status(500).json({ error: "Ошибка сервера" });
+  }
+});
+
 
 export default router;

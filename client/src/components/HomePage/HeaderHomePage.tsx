@@ -1,8 +1,7 @@
-import type { JSX } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Home.css"
 
-export default function Header(): JSX.Element {
+export const Header = () => {
     const navigate = useNavigate();
 
     return (

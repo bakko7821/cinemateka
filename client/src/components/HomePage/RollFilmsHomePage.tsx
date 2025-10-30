@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState, type JSX } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brush2Icon, Note2Icon } from "../../icons/Icons";
 
@@ -15,7 +15,7 @@ interface FilmData {
 
 const positionClasses = ["first", "second", "mainCard", "second", "first"];
 
-export default function RollFilms(): JSX.Element {
+export const RollFilms = () => {
   const [films, setFilms] = useState<FilmData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

@@ -62,67 +62,67 @@ export const ReviewPage = () => {
 
     return (
         <div className="page flex-column g16">
-            <div className="headingPageInfo">
-                <button className="backButton" onClick={() => navigate(-1)}>
-                    <LeftArrowIcon />
-                </button> 
-                <p className="titleText">Рецензия на фильм <span>{data?.review.film?.title}</span> от {data?.author.username}</p>
-            </div>
-            
-            <div className="reviewPage">
-                <div className="choosedFilmInfoBox flex-column" onClick={() => window.open(`https://www.kinopoisk.ru/film/${data?.review.film?.kpId}`)}>
-                    <p className="titleText">Информация о фильме:</p>
-                    {data?.review.film && (
-                        <div className="filmInfo">
-                        {data?.review.film.poster && <img src={data?.review.film.poster} alt="poster" />}
-                        <div className="filmTextInfoBox flex-column">
-                            <div className="titleBox">
-                            <p className="secondText">Название:</p>
-                            <p className="titleText">{data?.review.film.title} {data?.review.film.year ? `(${data?.review.film.year})` : ""}</p>
-                            </div>
-                            <div className="genresBox flex-column">
-                            <p className="secondText">Жанры:</p>
-                            <div className="genresList">
-                                {data?.review.film.genres?.map((genre, index) => (
-                                <div key={index} className="genreCard">{genre}</div>
-                                ))}
-                            </div>
-                            </div>
+        <div className="headingPageInfo">
+            <button className="backButton" onClick={() => navigate(-1)}>
+                <LeftArrowIcon />
+            </button> 
+            <p className="titleText">Рецензия на фильм <span>{data?.review.film?.title}</span> от {data?.author.username}</p>
+        </div>
+        
+        <div className="reviewPage">
+            <div className="choosedFilmInfoBox flex-column" onClick={() => window.open(`https://www.kinopoisk.ru/film/${data?.review.film?.kpId}`)}>
+                <p className="titleText">Информация о фильме:</p>
+                {data?.review.film && (
+                    <div className="filmInfo">
+                    {data?.review.film.poster && <img src={data?.review.film.poster} alt="poster" />}
+                    <div className="filmTextInfoBox flex-column">
+                        <div className="titleBox">
+                        <p className="secondText">Название:</p>
+                        <p className="titleText">{data?.review.film.title} {data?.review.film.year ? `(${data?.review.film.year})` : ""}</p>
                         </div>
+                        <div className="genresBox flex-column">
+                        <p className="secondText">Жанры:</p>
+                        <div className="genresList">
+                            {data?.review.film.genres?.map((genre, index) => (
+                            <div key={index} className="genreCard">{genre}</div>
+                            ))}
                         </div>
-                    )}
-                </div>
-                <div className="reviewInfoBox">
-                    <div className="headingBox">
-                        <div className="userInfo flex-center" onClick={() => navigate(`/profile/${data?.author._id}`)}>
-                            {userAvatar ? (
-                                <img className="userAvatar"
-                                    src={`http://localhost:5000${data?.author.image}`}
-                                    alt="avatar" />
-                            ) : (
-                                <div className="userAvatar flex-center">
-                                    <p>{data?.author.username.charAt(0)}</p>
-                                </div>
-                            )}
-                            <div className="textBox">
-                                <p className="fullNameUser">{data?.author.firstname} {data?.author.lastname}</p>
-                                <p className="userName">@{data?.author.username}</p>
-                            </div>
-                        </div>
-                        <span></span>
-                        <div className="stars flex-center">
-                        {Array.from({ length: 10 }).map((_, index) =>
-                            index < (data?.review.rating ?? 0) ? (
-                            <ActiveStar key={index}/>
-                            ) : (
-                            <NonActiveStar key={index}/>
-                            )
-                        )}
                         </div>
                     </div>
-                    <p className="reviewText">{data?.review.text}</p>
-                </div>
+                    </div>
+                )}
             </div>
+            <div className="reviewInfoBox">
+                <div className="headingBox">
+                    <div className="userInfo flex-center" onClick={() => navigate(`/profile/${data?.author._id}`)}>
+                        {userAvatar ? (
+                            <img className="userAvatar"
+                                src={`http://localhost:5000${data?.author.image}`}
+                                alt="avatar" />
+                        ) : (
+                            <div className="userAvatar flex-center">
+                                <p>{data?.author.username.charAt(0)}</p>
+                            </div>
+                        )}
+                        <div className="textBox">
+                            <p className="fullNameUser">{data?.author.firstname} {data?.author.lastname}</p>
+                            <p className="userName">@{data?.author.username}</p>
+                        </div>
+                    </div>
+                    <span></span>
+                    <div className="stars flex-center">
+                    {Array.from({ length: 10 }).map((_, index) =>
+                        index < (data?.review.rating ?? 0) ? (
+                        <ActiveStar key={index}/>
+                        ) : (
+                        <NonActiveStar key={index}/>
+                        )
+                    )}
+                    </div>
+                </div>
+                <p className="reviewText">{data?.review.text}</p>
+            </div>
+        </div>
         </div>
     )
 }

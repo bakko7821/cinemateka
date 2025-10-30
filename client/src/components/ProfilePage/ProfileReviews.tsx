@@ -25,7 +25,7 @@ export const ProfileReviews = ({ reviews }: { reviews: Review[] }) => {
                     </div>
                   </div>
                   <button className="goToReviewButton flex-center" onClick={() => navigate(`/review/${r._id}`)}>
-                    Читать подробно...
+                    Читать подробно
                   </button>
                 </div>
                 <p className="reviewText">{r.text}</p>

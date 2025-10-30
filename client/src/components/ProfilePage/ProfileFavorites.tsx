@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { GenreStat, Review } from "../../pages/ProfilePage";
 
 export const ProfileFavorites = ({ genres, reviews }: { genres: GenreStat[]; reviews: Review[] }) => {
@@ -28,10 +29,12 @@ export const ProfileFavorites = ({ genres, reviews }: { genres: GenreStat[]; rev
               .slice()
               .sort((a, b) => b.rating - a.rating)
               .map(r => (
-                <div className="filmCard flex-column" key={r._id}>
-                  {r.film?.poster && <img className="filmPoster" src={r.film.poster} alt={r.film.title} />}
-                  <div className="filmRaiting flex-center"><p>{r.rating}/10</p></div>
-                </div>
+                <Link to={`https://www.kinopoisk.ru/film/${r.film.kpId}`}>
+                  <div className="filmCard flex-column" key={r._id}>
+                    {r.film?.poster && <img className="filmPoster" src={r.film.poster} alt={r.film.title} />}
+                    <div className="filmRaiting flex-center"><p>{r.rating}/10</p></div>
+                  </div>
+                </Link>
               ))
           ) : (
             <p className="nullMessage">Нет рецензий</p>

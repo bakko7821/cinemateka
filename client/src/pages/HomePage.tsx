@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import Header from "../components/HomePage/HeaderHomePage";
-import Advantages from "../components/HomePage/AdvantagesHomePage";
-import RollFilms from "../components/HomePage/RollFilmsHomePage";
-import UserAuth from "../components/HomePage/UserAuthHomePage";
+import { Header } from "../components/HomePage/HeaderHomePage";
+import { Advantages } from "../components/HomePage/AdvantagesHomePage";
+import { RollFilms } from "../components/HomePage/RollFilmsHomePage";
+import { RandomRecomendedReviews } from "../components/HomePage/RandomRecomendedReviews";
 
 interface JwtPayload {
   id: string;
@@ -32,7 +32,7 @@ export const HomePage = () => {
     return (
         <div className="page flex-column g16">
         {isAuth ? (
-            <UserAuth />
+            <RandomRecomendedReviews />
         ) : (
             <div className="homePage flex-column flex-center">
                 <Header />

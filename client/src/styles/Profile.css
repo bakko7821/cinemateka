@@ -173,6 +173,7 @@
 }
 
 .filmRaiting {
+    color: var(--text-color);
     gap: 8px;
     position: absolute;
     bottom: 0;
