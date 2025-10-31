@@ -306,12 +306,20 @@ body::-webkit-scrollbar-thumb {
   object-fit: none;
 }
 
+.g32 {
+  gap: 32px;
+}
+
 .g16 {
   gap: 16px;
 }
 
 .g8 {
   gap: 8px;
+}
+
+.g4 {
+  gap: 4px;
 }
 
 .alertBox {

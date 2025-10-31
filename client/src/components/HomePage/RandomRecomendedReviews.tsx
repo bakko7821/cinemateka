@@ -103,6 +103,8 @@ export const RandomRecomendedReviews = () => {
         {data.map(item => (
           <div className="reviewCard flex-column g8" key={item.review._id} onClick={() => navigate(`/review/${item.review._id}`)}>
             {item.review.film?.poster && <img className="backgroundPoster" src={item.review.film.poster} alt={item.review.film.title} />}
+            <span className="backgroundImage"></span>
+            <p className="userReview">{item.review.text}</p>
             <div className="userInfo flex g8">
                 {item.author.image ? (
                     <img className="userAvatar" src={`http://localhost:5000${item.author.image}`} alt="avatar" />
@@ -112,12 +114,12 @@ export const RandomRecomendedReviews = () => {
                     </div>
                 )}
                 <span></span>
-                <div className="userText flex-column">
+                <div className="userText flex-center g8">
                     <p className="fullname">{item.author.firstname} {item.author.lastname}</p>
+                    <span></span>
                     <p className="username">@{item.author.username}</p>
                 </div>
             </div>
-            <p className="userReview">{item.review.text}</p>
           </div>
         ))}
       </div>

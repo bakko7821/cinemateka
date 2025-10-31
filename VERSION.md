@@ -326,3 +326,8 @@
 
 - Создан компонент **/components/HomePage/RandomRecomendedReviews.tsx**
 - Для компонента добавленны стили в **/styles/Home.css**
+
+## commit 15.36.6
+
+- Переделан компонент **/components/HomePage/RandomRecomendedReviews.tsx**, теперь отображается 3 карты и они больше
+- Написан .suscribeBox
