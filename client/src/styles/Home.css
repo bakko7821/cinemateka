@@ -275,6 +275,20 @@
     overflow: hidden;
 }
 
+.randomReviewsListTrack .reviewCard .userReview.skeleton {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    width: 100%;
+    height: 64px;
+}
+
+.randomReviewsListTrack .reviewCard .userInfo.skeleton {
+    background-color: var(--background-color);
+    border-radius: 12px;
+    width: 100%;
+    height: 36px;
+}
+
 .randomReviewsListTrack .reviewCard .userInfo .userText span {
     width: 1px;
     height: 16px;

@@ -273,12 +273,19 @@
 }
 
 .usersCardsBox .userCard .userAvatar {
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: 100%;
 }
 
 .usersCardsBox .userCard .textBox .fullNameUser{
+    font-size: var(--rem1);
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.usersCardsBox .userCard .textBox .userName{
+    font-size: var(--rem0-875);
     white-space: nowrap;
     overflow: hidden;
 }

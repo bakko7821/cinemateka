@@ -3,6 +3,7 @@ import type { User } from "../../pages/ProfilePage";
 import axios from "axios";
 import "../../styles/Home.css";
 import { useNavigate } from "react-router-dom";
+import { RandomRecomendedReviewsSkeleton } from "../Skeletons/RandomRecomendedReviewsSkeleton";
 
 interface Review {
   _id: string;
@@ -38,6 +39,7 @@ interface ReviewResponse {
 export const RandomRecomendedReviews = () => {
   const [data, setData] = useState<ReviewResponse[]>([]);
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate();
 
     useEffect(() => {
@@ -94,8 +96,10 @@ export const RandomRecomendedReviews = () => {
         };
 
         fetchReviewsWithFilms();
+        setLoading(true)
     }, [users]);
 
+  if (!loading) return <RandomRecomendedReviewsSkeleton />
 
   return (
     <div className="randomReviewsList flex g8">
