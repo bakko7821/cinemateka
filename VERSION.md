@@ -341,3 +341,14 @@
 
 - Создан компонент **SubscribeInfoBox.tsx**
 - Изменен компонент **HomePage.tsx**
+
+## commit 16.39.7
+
+### Серверная часть
+
+- В модель User.ts - добавлен параметр followersCount
+- Переписан роут favorite - который обновляет followersCount
+
+### Клиентская часть
+
+- Создан компонент **/components/HomePage/PopularUsersBox.tsx**

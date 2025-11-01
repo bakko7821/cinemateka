@@ -17,6 +17,7 @@ export interface User {
   favorites: string[];
   reviews: Review[];
   subscribe: boolean;
+  followersCount: number;
 }
 
 export interface GenreStat {
@@ -137,10 +138,12 @@ export const ProfilePage = () => {
 
     const parsed = JSON.parse(authUser);
     try {
-      await axios.post(`http://localhost:5000/users/${targetId}/favorite`, {
+      const res = await axios.post(`http://localhost:5000/users/${targetId}/favorite`, {
         userId: parsed._id,
       });
-      setIsFollowing(!isFollowing);
+      setIsFollowing(res.data.following);
+      // если хочешь — можешь сразу обновить счетчик на UI
+      // setFollowersCount(res.data.followersCount);
     } catch (err) {
       console.error("Ошибка при подписке:", err);
     }

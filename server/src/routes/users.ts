@@ -206,44 +206,56 @@ router.put("/:id/set", upload.single("avatar"), async (req: Request, res: Respon
 
 router.post("/:id/favorite", async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
-    const { userId } = req.body;
+    const { id: targetId } = req.params; // тот, на кого подписываются
+    const { userId } = req.body;         // тот, кто подписывается
 
-    if (!userId) {
+    if (!userId)
       return res.status(400).json({ error: "Не передан userId" });
-    }
 
-    if (id === userId) {
+    if (userId === targetId)
       return res.status(400).json({ error: "Нельзя подписаться на себя" });
-    }
 
     const user = await User.findById(userId);
-    const target = await User.findById(id);
+    const target = await User.findById(targetId);
 
-    if (!user || !target) {
+    if (!user || !target)
       return res.status(404).json({ error: "Пользователь не найден" });
-    }
 
-    const isFollowing = user.favorites.includes(new mongoose.Types.ObjectId(id));
+    const isFollowing = user.favorites.some(
+      (favId) => favId.toString() === targetId
+    );
 
     if (isFollowing) {
+      // Отписка
       user.favorites = user.favorites.filter(
-        favId => favId.toString() !== id
+        (favId) => favId.toString() !== targetId
       );
-      await user.save();
-      return res.json({ msg: "Отписка выполнена", favorites: user.favorites });
+      target.followersCount = Math.max(0, (target.followersCount || 0) - 1);
+      await Promise.all([user.save(), target.save()]);
+      return res.json({
+        msg: "Отписка выполнена",
+        following: false,
+        followersCount: target.followersCount,
+      });
     } else {
-      user.favorites.push(new mongoose.Types.ObjectId(id));
-      await user.save();
-      return res.json({ msg: "Подписка выполнена", favorites: user.favorites });
+      // Подписка
+      user.favorites.push(target._id as mongoose.Types.ObjectId);
+      target.followersCount = (target.followersCount || 0) + 1;
+      await Promise.all([user.save(), target.save()]);
+      return res.json({
+        msg: "Подписка выполнена",
+        following: true,
+        followersCount: target.followersCount,
+      });
     }
-
   } catch (err: unknown) {
+    console.error(err);
     return res.status(500).json({
       error: err instanceof Error ? err.message : "Неизвестная ошибка",
     });
   }
 });
+
 
 router.get("/:id/favorite", async (req: Request, res: Response) => {
   try {

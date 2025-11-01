@@ -8,6 +8,7 @@ import { SubscribeInfoBox } from "../components/HomePage/SubscribeInfoBox";
 import axios from "axios";
 import { BrushIcon } from "../icons/Icons";
 import { useNavigate } from "react-router-dom";
+import { PopularUsersBox } from "../components/HomePage/PopularUsersBox";
 
 interface JwtPayload {
   id: string;
@@ -79,6 +80,7 @@ export const HomePage = () => {
                     ) : (
                         <SubscribeInfoBox />
                     )}
+                    <PopularUsersBox />
                 </>
             ) : (
                 <>
