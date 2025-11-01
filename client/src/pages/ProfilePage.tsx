@@ -16,6 +16,7 @@ export interface User {
   image: string;
   favorites: string[];
   reviews: Review[];
+  subscribe: boolean;
 }
 
 export interface GenreStat {

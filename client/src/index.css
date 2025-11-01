@@ -310,6 +310,10 @@ body::-webkit-scrollbar-thumb {
   gap: 32px;
 }
 
+.g24 {
+  gap: 24px;
+}
+
 .g16 {
   gap: 16px;
 }

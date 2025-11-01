@@ -366,3 +366,42 @@
         flex: 2;
     }
 }
+
+.tellUsBox {
+    width: 100%;
+}
+
+.tellUsBox img {
+    width: 400px;
+}
+
+.tellUsBox .textBox {
+    padding: 8px;
+}
+
+.tellUsBox .textBox .titleText{
+    font-weight: 700;
+    font-size: var(--rem2);
+    text-transform: uppercase;
+    padding: 0;
+    line-height: 1.4;
+}
+
+.tellUsBox .textBox .descriptionText {
+    font-size: var(--rem1);
+    line-height: 1.5;
+}
+
+.tellUsBox .textBox button {
+    background-color: var(--main-color);
+    width: 100%;
+    border-radius: 16px;
+    padding: 8px;
+    font-size: var(--rem1-5);
+    color: var(--button-text-color);
+    font-weight: 500;
+}
+
+.tellUsBox .textBox button svg {
+    color: var(--button-text-color);
+}

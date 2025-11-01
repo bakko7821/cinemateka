@@ -13,6 +13,7 @@ export interface IUser extends Document {
   username: string;
   email: string;
   password: string;
+  subscribe: boolean;
   createdAt: Date;
   image?: string;
   reviews: IReview[];
@@ -36,6 +37,7 @@ const userSchema = new Schema<IUser>({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  subscribe: { type: Boolean, required: false, default: false},
   createdAt: { type: Date, default: Date.now },
   image: { type: String, default: "" },
   reviews: { type: [reviewSchema], default: [] },

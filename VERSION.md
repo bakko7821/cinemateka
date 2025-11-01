@@ -336,3 +336,8 @@
 
 - Создан скелет компонента **/components/HomePage/RandomRecomendedReviews.tsx**
 - Переделанны стили
+
+## commit 15.38.7
+
+- Создан компонент **SubscribeInfoBox.tsx**
+- Изменен компонент **HomePage.tsx**

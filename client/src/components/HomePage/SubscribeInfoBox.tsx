@@ -1,0 +1,28 @@
+export const SubscribeInfoBox = () => {
+    return (
+        <div className="subscribeBox flex g16">
+            <div className="subcsribeCard kitty flex-between g16">
+                <div className="textBox flex-column g16">
+                    <p className="headingTitle">Подписка "Kitty"</p>
+                    <ul className="conditionsBox flex-column g8">
+                        <li> - Условие 1</li>
+                        <li> - Условие 2</li>
+                        <li> - Условие 3</li>
+                    </ul>
+                </div>
+                <img src="../../public/images/vecteezy_3d-cute-cat-happy-kitten-character_60006772.png" className="subcsribeCardImage" alt="" />
+            </div>
+            <div className="subcsribeCard croco flex-between g16">
+                <div className="textBox flex-column g16">
+                    <p className="headingTitle">Подписка "Croco"</p>
+                    <ul className="conditionsBox flex-column g8">
+                        <li> - Условие 1</li>
+                        <li> - Условие 2</li>
+                        <li> - Условие 3</li>
+                    </ul>
+                </div>
+                <img src="../../public/images/vecteezy_3d-cute-crocodile-character_60006795.png" className="subcsribeCardImage" alt="" />
+            </div>
+        </div>
+    )
+}
